@@ -1,7 +1,5 @@
-using NewMachine.input_and_environment;
-using NewMachine.input_and_environment.Interfaces;
 
-namespace NewMachine.Generics
+namespace Generics
 {
     public interface IStateMachine
     {
@@ -12,6 +10,6 @@ namespace NewMachine.Generics
         public void ChangeState(IState newState);
         public ITransition GetTransition();
         public void Start();
-        public void PassInput(IInputCommand inputCommand);
+        public void PassInput(InputCommand inputCommand);
     }
 }

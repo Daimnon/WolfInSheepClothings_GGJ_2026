@@ -1,18 +1,14 @@
 
 using System;
 using System.Collections.Generic;
-using NewMachine.input_and_environment;
-using NewMachine.input_and_environment.Interfaces;
 using UnityEngine;
 
-namespace NewMachine.Generics
+namespace Generics
 {
     public abstract class StateMachine : IStateMachine
     {
         // a generic state machine that can handle any type of state that implements the IState interface
         protected IStateMachineController StateMachineController { get; private set; }
-        public PlayerContext PlayerContext { get; private set; }
-        public BehaviourSO BehaviourSo { get; private set; }
         
         public IState CurrentState => current.State;
         public IState PreviousState => previous.State;
@@ -25,11 +21,9 @@ namespace NewMachine.Generics
         
         public bool IsAlive { get; private set; }
         
-        protected StateMachine(IStateMachineController stateMachineController, PlayerContext playerContext, BehaviourSO behaviourSO)
+        protected StateMachine(IStateMachineController stateMachineController)
         {
             this.StateMachineController = stateMachineController;
-            this.PlayerContext = playerContext;
-            this.BehaviourSo = behaviourSO;
         }
 
         public void NotifyEndBehaviour()
@@ -42,7 +36,7 @@ namespace NewMachine.Generics
             IsAlive = true;
         }
 
-        public virtual void PassInput(IInputCommand inputCommand)
+        public virtual void PassInput(InputCommand inputCommand)
         {
             current.State.NewInputUpdate(inputCommand);
         }

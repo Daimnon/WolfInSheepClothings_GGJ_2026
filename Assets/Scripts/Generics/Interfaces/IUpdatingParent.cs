@@ -1,6 +1,6 @@
 using System;
 
-namespace NewMachine.Generics
+namespace Generics
 {
     public interface IUpdatingParent
     {

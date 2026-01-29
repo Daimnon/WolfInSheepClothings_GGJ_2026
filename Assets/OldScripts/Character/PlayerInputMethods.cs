@@ -20,6 +20,11 @@ public class PlayerInputMethods: MonoBehaviour
         OnInputPerformed?.Invoke(InputType.RightClick);
     }
 }
+public struct InputCommand
+{
+    public InputType InputType;
+    public InputActionPhase Phase;
+}
 
 public enum InputType
 {
