@@ -1,0 +1,68 @@
+using NewMachine.Generics.Singleton;
+using NewMachine.input_and_environment.Interfaces;
+
+namespace NewMachine.Generics
+{
+    public abstract class BaseState : IState, IUpdateable
+    {
+        public IUpdatingParent UpdatingParent { get; set; }
+        protected IStateMachine StateMachine { get; set; }
+
+        private readonly bool isInterruptible;
+        bool IState.IsInterruptible => isInterruptible;
+
+        protected BaseState(IStateMachine stateMachine, bool isInterruptible = true)
+        {
+            this.isInterruptible = isInterruptible;
+            StateMachine = stateMachine;
+            UpdatingParent = UpdatingManager.Instance;
+        }
+        
+        protected void ExitStateEarly()
+        {
+            var transitionState = StateMachine.GetTransition();
+            if (transitionState != null)
+            {
+                StateMachine.ChangeState(transitionState.TargetState);
+            }
+        }
+
+        public virtual void OnEnter()
+        {
+            var transitionState = StateMachine.GetTransition();
+            if (transitionState == null)
+            {
+                RegisterToUpdatingParent();
+            }
+            else
+            {
+                StateMachine.ChangeState(transitionState.TargetState);
+            }
+        }
+
+        public virtual void OnExit()
+        {
+            UnregisterFromUpdatingParent();
+        }
+
+        protected virtual void RegisterToUpdatingParent()
+        {
+            // note: this only registers for FixedUpdate. Override if you need Update.
+
+            UpdatingParent.RegisterUpdateable(this, UpdateType.Fixed, UpdatePriority.Medium);
+        }
+
+        protected virtual void UnregisterFromUpdatingParent()
+        {
+            UpdatingParent.UnregisterUpdateable(this);
+        }
+
+        public virtual void NewInputUpdate(IInputCommand inputCommand)
+        {
+            StateMachine.NotifyEndBehaviour();
+        }
+
+        public abstract void Tick(float deltaTime);
+        public abstract void FixedTick(float fixedDeltaTime);
+    }
+}
