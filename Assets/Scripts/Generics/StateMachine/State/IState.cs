@@ -1,6 +1,5 @@
-using NewMachine.input_and_environment.Interfaces;
 
-namespace NewMachine.Generics
+namespace Generics
 {
     public interface IState
     { 
@@ -8,6 +7,6 @@ namespace NewMachine.Generics
         protected bool IsInterruptible { get; }
         public void OnEnter();
         public void OnExit();
-        public void NewInputUpdate(IInputCommand inputCommand);
+        public void NewInputUpdate(InputCommand inputCommand);
     }
 }

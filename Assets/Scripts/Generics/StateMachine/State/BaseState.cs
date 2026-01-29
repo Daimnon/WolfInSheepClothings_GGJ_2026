@@ -1,7 +1,5 @@
-using NewMachine.Generics.Singleton;
-using NewMachine.input_and_environment.Interfaces;
-
-namespace NewMachine.Generics
+using Singleton;
+namespace Generics
 {
     public abstract class BaseState : IState, IUpdateable
     {
@@ -57,7 +55,7 @@ namespace NewMachine.Generics
             UpdatingParent.UnregisterUpdateable(this);
         }
 
-        public virtual void NewInputUpdate(IInputCommand inputCommand)
+        public virtual void NewInputUpdate(InputCommand inputCommand)
         {
             StateMachine.NotifyEndBehaviour();
         }

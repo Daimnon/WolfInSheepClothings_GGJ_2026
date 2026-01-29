@@ -1,4 +1,4 @@
-namespace NewMachine.Generics
+namespace Generics
 {
     public class Transition : ITransition
     {
