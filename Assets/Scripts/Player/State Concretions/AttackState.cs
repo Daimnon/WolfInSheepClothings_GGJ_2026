@@ -16,19 +16,16 @@ namespace Player.State_Concretions
             timer = 0;
             var attackDirection = StateMachine.MoveInput;
             var attackDirection3 = new Vector3(attackDirection.x, 0, attackDirection.y);
+            var rotatedDirection = (Quaternion.Euler(0f, 45f, 0f) * attackDirection3).normalized; ;
             
-            if (attackDirection3 == Vector3.zero)
+            if (rotatedDirection == Vector3.zero)
             {
-                attackDirection3 = StateMachine.StateMachineController.GetTransform().forward;
+                rotatedDirection = StateMachine.StateMachineController.GetTransform().forward;
             }
 
-            var sheepInRange = StateMachine.StateMachineController.GetSheepInSphereCast();
-            if (sheepInRange && sheepInRange.isAlive)
-            {
-                sheepInRange.Die();
-            }
+            StateMachine.StateMachineController.StartCheckForSheepCoroutine(InputType.Attack);
             
-            RigidbodyUtility.AddImpulse(attackDirection3, playerSO.AttackForce);
+            RigidbodyUtility.AddImpulse(rotatedDirection, playerSO.AttackForce);
         }
 
         public override void Tick(float deltaTime)

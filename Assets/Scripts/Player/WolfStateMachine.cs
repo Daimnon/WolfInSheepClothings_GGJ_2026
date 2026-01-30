@@ -28,6 +28,8 @@ namespace Player
             AddState(stainState, stainState.GetType());
             AddAnyTransition(stainState.GetType(), new FuncPredicate(() => playerControlsHandler.IsInputTypeActive(InputType.Stain)));
             
+            //eating state left
+            
             SetState(locomotionState);
         }
     }
