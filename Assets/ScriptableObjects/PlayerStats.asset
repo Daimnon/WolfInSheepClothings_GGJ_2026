@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSO
   normalForce: 50
   maxNormalVelocity: 10
-  sprintForce: 200
+  sprintForce: 100
   sprintMaxVelocity: 15
   attackDuration: 0.3
-  attackForce: 50
+  attackForce: 20
   stainDuration: 0.3
   stainForce: 10
   eatingDurationToConsume: 1.5
+  detectionRange: 0
+  detectionRadius: 0
+  rotationLerpSpeed: 0
+  rotationDeadzone: 0
