@@ -28002,7 +28002,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933696698}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0.19509032, z: -0, w: 0.9807853}
   m_LocalPosition: {x: 0, y: 0, z: -14.935}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -30338,7 +30338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6442970712103989765, guid: b24a0e8edc3d30c48b5a7dce24b23de1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: 6442970712103989765, guid: b24a0e8edc3d30c48b5a7dce24b23de1, type: 3}
       propertyPath: m_LocalRotation.x
@@ -30346,7 +30346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6442970712103989765, guid: b24a0e8edc3d30c48b5a7dce24b23de1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: 6442970712103989765, guid: b24a0e8edc3d30c48b5a7dce24b23de1, type: 3}
       propertyPath: m_LocalRotation.z
@@ -30358,7 +30358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6442970712103989765, guid: b24a0e8edc3d30c48b5a7dce24b23de1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 6442970712103989765, guid: b24a0e8edc3d30c48b5a7dce24b23de1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
