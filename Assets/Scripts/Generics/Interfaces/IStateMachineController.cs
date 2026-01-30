@@ -9,6 +9,8 @@ namespace Generics
         public void NotifyChangeInShootableType(ShootableType newType);
         
         public Transform GetTransform();
+        
+        public Sheep GetSheepSphereCast();
 
     }
 }
