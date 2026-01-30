@@ -6,7 +6,8 @@ public enum ShootableType
 {
     Wolf,
     Sheep,
-    BloodySheep
+    BloodySheep,
+    Hidden
 }
 
 public class GameManager : MonoBehaviour

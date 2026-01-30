@@ -367,6 +367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.PlayerHandler
   playerControlsHandler: {fileID: 1430083149}
+  playerSO: {fileID: 11400000, guid: e1fd3fab68c825a48888ab30178c9071, type: 2}
 --- !u!1001 &2509734574698956068
 PrefabInstance:
   m_ObjectHideFlags: 0

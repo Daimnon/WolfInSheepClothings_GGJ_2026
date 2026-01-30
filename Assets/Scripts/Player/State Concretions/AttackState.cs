@@ -4,12 +4,24 @@ namespace Player.State_Concretions
 {
     public class AttackState : BaseState
     {
-        public AttackState(IStateMachine stateMachine, PlayerSO p1) : base(stateMachine, p1)
+        private float timer = 0;
+        public AttackState(IStateMachine stateMachine, PlayerSO playerSO) : base(stateMachine, playerSO)
         {
+        }
+        
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            timer = 0;
         }
 
         public override void Tick(float deltaTime)
         {
+            timer += deltaTime;
+            if (timer >= playerSO.AttackDuration)
+            {
+                StateMachine.NotifyEndBehaviour();
+            }
         }
 
         public override void FixedTick(float fixedDeltaTime)

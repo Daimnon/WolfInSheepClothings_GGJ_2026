@@ -5,11 +5,14 @@ namespace Generics
     {
         public IUpdatingParent UpdatingParent { get; set; }
         protected IStateMachine StateMachine { get; set; }
+
+        protected PlayerSO playerSO;
         
         protected BaseState(IStateMachine stateMachine, PlayerSO playerSO)
         {
             StateMachine = stateMachine;
             UpdatingParent = UpdatingManager.Instance;
+            this.playerSO = playerSO;
         }
         
         protected void ExitStateEarly()
@@ -43,7 +46,7 @@ namespace Generics
         {
             // note: this only registers for FixedUpdate. Override if you need Update.
 
-            UpdatingParent.RegisterUpdateable(this, UpdateType.Fixed, UpdatePriority.Medium);
+            UpdatingParent.RegisterUpdateable(this, UpdateType.Both, UpdatePriority.Medium);
         }
 
         protected virtual void UnregisterFromUpdatingParent()
