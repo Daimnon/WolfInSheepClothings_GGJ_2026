@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1260583634257711845}
   - component: {fileID: 8154877752104567975}
   - component: {fileID: 2658303017506778744}
+  - component: {fileID: 6213917762644695821}
   m_Layer: 0
   m_Name: Prefab_Sheep
   m_TagString: Untagged
@@ -78,6 +79,8 @@ MonoBehaviour:
   _fearRadius: 6
   _stuckCheckInterval: 1
   _minDistanceProgress: 0.15
+  _minWanderDelay: 2
+  _maxWanderDelay: 5
   _testPoint: {fileID: 0}
 --- !u!195 &2658303017506778744
 NavMeshAgent:
@@ -101,6 +104,29 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &6213917762644695821
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039577632872626818}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7562632270424486054
 PrefabInstance:
   m_ObjectHideFlags: 0

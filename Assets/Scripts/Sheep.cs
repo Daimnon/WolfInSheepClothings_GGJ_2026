@@ -31,7 +31,7 @@ public class Sheep : MonoBehaviour, IShootable
     private void Start()
     {
         _agent.speed = _moveSpeed;
-        SetNewDestination();
+        StartWandering();
     }
 
     #region IShootable
