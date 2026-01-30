@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2030959483984822250}
   m_Layer: 7
   m_Name: Prefab_Sheep
-  m_TagString: Untagged
+  m_TagString: Sheep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +84,7 @@ MonoBehaviour:
   _minWanderDelay: 2
   _maxWanderDelay: 5
   _testPoint: {fileID: 0}
+  isAlive: 1
 --- !u!195 &2658303017506778744
 NavMeshAgent:
   m_ObjectHideFlags: 0

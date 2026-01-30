@@ -28,6 +28,8 @@ public class Sheep : MonoBehaviour, IShootable
     [SerializeField] private Transform _testPoint;
     private Vector3 _moveVector;
 
+    public bool isAlive = true;
+
     private void Start()
     {
         _agent.speed = _moveSpeed;
@@ -49,6 +51,11 @@ public class Sheep : MonoBehaviour, IShootable
         return _shootableType;
     }
     public bool CanBeTargeted => true;
+    public void NotifyPuddleEnter()
+    {
+        _shootableType = ShootableType.Sheep;
+    }
+
     #endregion
 
     #region Set New Destination
@@ -209,7 +216,10 @@ public class Sheep : MonoBehaviour, IShootable
     {
         GameManager.OnSheepKilled?.Invoke(transform.position);
         GameManager.UpdateSheepCount?.Invoke();
+        _agent.isStopped = true;
         _agent.enabled = false;
+        isAlive = false;
+        StopAllCoroutines();
     }
 
     private void OnDrawGizmos()
@@ -233,24 +243,4 @@ public class Sheep : MonoBehaviour, IShootable
         // Draw the point
         Gizmos.DrawSphere(point, 0.1f);
     }
-
-    /*private IEnumerator MoveToTarget()
-    {
-        Vector2 endPos = (Vector2)transform.position + _targetPos;
-
-        while (true)
-        {
-            Vector2 currentPos = transform.position;
-            Vector2 newPos = Vector2.MoveTowards(currentPos,endPos,_moveSpeed * Time.deltaTime);
-            transform.position = newPos;
-
-            if ((endPos - newPos).sqrMagnitude <= 0.0001f)
-            {
-                transform.position = endPos;
-                yield break;
-            }
-
-            yield return null;
-        }
-    }*/
 }

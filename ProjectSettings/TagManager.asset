@@ -8,6 +8,7 @@ TagManager:
   - FinishLine
   - Paddle
   - Bush
+  - Sheep
   layers:
   - Default
   - TransparentFX

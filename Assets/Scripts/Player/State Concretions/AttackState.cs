@@ -23,7 +23,7 @@ namespace Player.State_Concretions
             }
 
             var sheepInRange = StateMachine.StateMachineController.GetSheepInSphereCast();
-            if (sheepInRange)
+            if (sheepInRange && sheepInRange.isAlive)
             {
                 sheepInRange.Die();
             }

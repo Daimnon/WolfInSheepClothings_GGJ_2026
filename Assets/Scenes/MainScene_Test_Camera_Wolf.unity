@@ -19463,6 +19463,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_Sheep_48
       objectReference: {fileID: 0}
+    - target: {fileID: 2030959483984822250, guid: 35552150acb087a479d45b80c7af2eed, type: 3}
+      propertyPath: m_AngularDamping
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22105,7 +22109,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

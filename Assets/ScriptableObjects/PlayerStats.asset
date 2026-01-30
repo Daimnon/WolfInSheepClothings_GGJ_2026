@@ -21,7 +21,5 @@ MonoBehaviour:
   stainDuration: 0.3
   stainForce: 10
   eatingDurationToConsume: 1.5
-  detectionRange: 0
-  detectionRadius: 0
-  rotationLerpSpeed: 0
-  rotationDeadzone: 0
+  detectionRange: 2
+  detectionRadius: 1
