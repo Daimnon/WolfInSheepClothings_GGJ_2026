@@ -10,7 +10,7 @@ namespace Generics
         
         public Transform GetTransform();
         
-        public Sheep GetSheepSphereCast();
+        public Sheep GetSheepInSphereCast();
 
     }
 }
