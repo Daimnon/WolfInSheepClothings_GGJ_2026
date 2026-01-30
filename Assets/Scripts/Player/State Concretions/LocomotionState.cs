@@ -4,7 +4,7 @@ namespace Player.State_Concretions
 {
     public class LocomotionState : BaseState
     {
-        public LocomotionState(IStateMachine stateMachine, PlayerSO playerSO) : base(stateMachine, playerSO)
+        public LocomotionState(StateMachine stateMachine, PlayerSO playerSO) : base(stateMachine, playerSO)
         {
         }
 

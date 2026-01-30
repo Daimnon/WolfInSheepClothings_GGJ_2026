@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Generics
 {
-    public abstract class StateMachine : IStateMachine
+    public abstract class StateMachine
     {
         // a generic state machine that can handle any type of state that implements the IState interface
         protected IStateMachineController StateMachineController { get; private set; }

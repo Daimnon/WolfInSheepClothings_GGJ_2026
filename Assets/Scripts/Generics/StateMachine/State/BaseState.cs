@@ -4,11 +4,11 @@ namespace Generics
     public abstract class BaseState : IState, IUpdateable
     {
         public IUpdatingParent UpdatingParent { get; set; }
-        protected IStateMachine StateMachine { get; set; }
+        protected StateMachine StateMachine { get; set; }
 
         protected PlayerSO playerSO;
         
-        protected BaseState(IStateMachine stateMachine, PlayerSO playerSO)
+        protected BaseState(StateMachine stateMachine, PlayerSO playerSO)
         {
             StateMachine = stateMachine;
             UpdatingParent = UpdatingManager.Instance;
