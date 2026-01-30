@@ -135,11 +135,10 @@ namespace Player
                     break;
             }
 
-            while (timer > 0f || targetFound)
+            while (timer > 0f && !targetFound)
             {
                 var attackDirection = graphics.forward;
-                var playerMove3 = Quaternion.Euler(0f, 45f, 0f) * new Vector3(attackDirection.x, 0f, attackDirection.y).normalized;
-                if (Physics.SphereCast(transform.position, playerSO.DetectionRadius, playerMove3, out RaycastHit hit, playerSO.DetectionRange))
+                if (Physics.SphereCast(transform.position, playerSO.DetectionRadius, attackDirection, out RaycastHit hit, playerSO.DetectionRange))
                 {
                     if (hit.collider.gameObject.CompareTag("Sheep"))
                     {
@@ -187,6 +186,22 @@ namespace Player
                 targetRotation,
                 rotationSpeed * Time.deltaTime
             );
+        }
+        
+        private void OnDrawGizmos()
+        {
+            if (graphics == null || playerSO == null)
+                return;
+
+            var attackDirection = graphics.forward;
+            var playerMove3 = new Vector3(attackDirection.x, 0f, attackDirection.z).normalized;
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(transform.position, playerMove3 * playerSO.DetectionRange);
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, playerSO.DetectionRadius);
+            Gizmos.DrawWireSphere(transform.position + playerMove3 * playerSO.DetectionRange, playerSO.DetectionRadius);
         }
     }
 }
