@@ -42,11 +42,13 @@ public class Sheep : MonoBehaviour, IShootable
     public void GotShot()
     {
         Debug.Log("GotShot");
+        Die();
     }
     public ShootableType GetShootableType()
     {
         return _shootableType;
     }
+    public bool CanBeTargeted => true;
     #endregion
 
     #region Set New Destination
@@ -70,7 +72,7 @@ public class Sheep : MonoBehaviour, IShootable
     [ContextMenu("SetNewDestination")]
     private void SetNewDestination()
     {
-        Debug.Log("New Destination");
+        //Debug.Log("New Destination");
         Vector3 newTargetPos = transform.position + GetNewMoveVector(SetNewDirection());
         _agent.SetDestination(newTargetPos);
         StartStuckCheck();
@@ -87,7 +89,7 @@ public class Sheep : MonoBehaviour, IShootable
     {
         if (IsPointInsideRadius(point))
         {
-            Debug.Log("Inside Radius");
+            //Debug.Log("Inside Radius");
             Vector3 oppositeDirection = (transform.position - point).normalized;
             Vector3 newTargetPos = transform.position + GetNewMoveVector(oppositeDirection);
             _agent.speed = _fearSpeed;
@@ -105,7 +107,7 @@ public class Sheep : MonoBehaviour, IShootable
     {
         if (IsPointInsideRadius(_testPoint.position))
         {
-            Debug.Log("Inside Radius");
+            //Debug.Log("Inside Radius");
             Vector3 oppositeDirection = (transform.position - _testPoint.position).normalized;
             Vector3 newTargetPos = transform.position + GetNewMoveVector(oppositeDirection);
             _agent.speed = _fearSpeed;
@@ -159,7 +161,7 @@ public class Sheep : MonoBehaviour, IShootable
     }
     private void OnStuck()
     {
-        Debug.Log("Sheep is stuck, recovering.");
+        //Debug.Log("Sheep is stuck, recovering.");
         _agent.ResetPath();
     }
     #endregion
@@ -205,7 +207,9 @@ public class Sheep : MonoBehaviour, IShootable
 
     private void Die()
     {
-
+        GameManager.OnSheepKilled.Invoke(transform.position);
+        GameManager.UpdateSheepCount.Invoke();
+        _agent.enabled = false;
     }
 
     private void OnDrawGizmos()

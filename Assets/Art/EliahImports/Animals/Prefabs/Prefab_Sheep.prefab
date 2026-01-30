@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8154877752104567975}
   - component: {fileID: 2658303017506778744}
   - component: {fileID: 6213917762644695821}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Prefab_Sheep
   m_TagString: Untagged
   m_Icon: {fileID: 0}

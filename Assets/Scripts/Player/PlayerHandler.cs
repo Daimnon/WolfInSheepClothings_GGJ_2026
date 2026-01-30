@@ -9,12 +9,14 @@ namespace Player
         [SerializeField] private Rigidbody rb;
         [SerializeField] private PlayerControlsHandler playerControlsHandler;
         [SerializeField] private PlayerSO playerSO;
+        [SerializeField] private ShepherdAI shepherdAI;
         private WolfStateMachine stateMachine;
         private ShootableType shootableType;
         private bool isHiddenInBush = false;
         private bool isBloody = false;
+        private bool isCrouching = false;
 
-        public static event Action<Vector3> OnSheepKilled;
+        //public static event Action<Vector3> OnSheepKilled;
 
         public void Awake()
         {
@@ -39,9 +41,11 @@ namespace Player
             {
                 case ShootableType.Wolf:
                     shootableType = newType;
+                    isCrouching = false;
                     break;
                 case ShootableType.Sheep:
                     shootableType = isBloody ? ShootableType.BloodySheep : newType;
+                    isCrouching = true;
                     break;
                 case ShootableType.BloodySheep:
                     shootableType = newType;
@@ -79,6 +83,18 @@ namespace Player
             if (isHiddenInBush)
                 return ShootableType.Hidden;
             return shootableType;
+        }
+
+        public bool CanBeTargeted
+        {
+            get
+            {
+                if (isHiddenInBush) return false;
+                
+                if(shepherdAI.AggroMeter >= 50) return true;
+                
+                return !isCrouching;
+            }
         }
 
         public void OnValidate()
