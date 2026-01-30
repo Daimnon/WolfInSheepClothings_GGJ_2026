@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CinemachineTarget
   - FinishLine
+  - Paddle
+  - Bush
   layers:
   - Default
   - TransparentFX
