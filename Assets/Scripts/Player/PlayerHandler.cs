@@ -137,9 +137,11 @@ namespace Player
                 return;
             // convert 2D input to 3D world direction
             Vector3 moveDir = new Vector3(MoveInput.x, 0f, MoveInput.y).normalized;
+            var moveDirRotated = Quaternion.Euler(0f, 45f, 0f) * moveDir.normalized;
+
 
             // calculate the target rotation
-            Quaternion targetRotation = Quaternion.LookRotation(moveDir, Vector3.up);
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirRotated, Vector3.up);
 
             // rotate graphics toward target rotation
             graphics.rotation = Quaternion.RotateTowards(
