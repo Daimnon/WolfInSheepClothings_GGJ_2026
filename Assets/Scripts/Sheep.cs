@@ -19,6 +19,11 @@ public class Sheep : MonoBehaviour, IShootable
     [SerializeField] private float _minDistanceProgress = 0.15f;
     private Coroutine _stuckCoroutine;
 
+    [Header("Wander Settings")]
+    [SerializeField] private float _minWanderDelay = 2.0f;
+    [SerializeField] private float _maxWanderDelay = 10.0f;
+    private Coroutine _wanderCoroutine;
+
     [Header("Debugging")]
     [SerializeField] private Transform _testPoint;
     private Vector3 _moveVector;
@@ -26,6 +31,7 @@ public class Sheep : MonoBehaviour, IShootable
     private void Start()
     {
         _agent.speed = _moveSpeed;
+        SetNewDestination();
     }
 
     #region IShootable
@@ -57,7 +63,6 @@ public class Sheep : MonoBehaviour, IShootable
         float newMagnitude = Random.Range(_minMoveDistance, _maxMoveDistance);
         Vector3 newTargetPos = direction * newMagnitude;
         _moveVector = newTargetPos;
-        StartStuckCheck();
         return newTargetPos;
 
     }
@@ -68,6 +73,7 @@ public class Sheep : MonoBehaviour, IShootable
         Debug.Log("New Destination");
         Vector3 newTargetPos = transform.position + GetNewMoveVector(SetNewDirection());
         _agent.SetDestination(newTargetPos);
+        StartStuckCheck();
     }
     #endregion
 
@@ -86,6 +92,7 @@ public class Sheep : MonoBehaviour, IShootable
             Vector3 newTargetPos = transform.position + GetNewMoveVector(oppositeDirection);
             _agent.speed = _fearSpeed;
             _agent.SetDestination(newTargetPos);
+            StartStuckCheck();
         }
         else
         {
@@ -154,6 +161,38 @@ public class Sheep : MonoBehaviour, IShootable
     {
         Debug.Log("Sheep is stuck, recovering.");
         _agent.ResetPath();
+    }
+    #endregion
+
+    #region Wander
+    private void StartWandering()
+    {
+        StopWandering();
+        _wanderCoroutine = StartCoroutine(WanderRoutine());
+    }
+    private void StopWandering()
+    {
+        if (_wanderCoroutine != null)
+        {
+            StopCoroutine(_wanderCoroutine);
+            _wanderCoroutine = null;
+        }
+    }
+    private IEnumerator WanderRoutine()
+    {
+        while (true)
+        {
+            float waitTime = Random.Range(_minWanderDelay, _maxWanderDelay);
+            yield return new WaitForSeconds(waitTime);
+
+            // If sheep is currently moving or fleeing, skip this tick
+            if (_agent.hasPath)
+                continue;
+
+            // Normal wander movement
+            _agent.speed = _moveSpeed;
+            SetNewDestination();
+        }
     }
     #endregion
 
