@@ -39,8 +39,8 @@ public class Sheep : MonoBehaviour, IShootable
         return new Vector3(randX, 0.0f, randY).normalized;
     }
 
-    [ContextMenu("SetNewMoveVector")]
-    private Vector3 SetNewMoveVector(Vector3 direction)
+    [ContextMenu("GetNewMoveVector")]
+    private Vector3 GetNewMoveVector(Vector3 direction)
     {
         float newMagnitude = Random.Range(_minMoveDistance, _maxMoveDistance);
         Vector3 newTargetPos = direction * newMagnitude;
@@ -52,7 +52,7 @@ public class Sheep : MonoBehaviour, IShootable
     private void SetNewDestination()
     {
         Debug.Log("New Destination");
-        Vector3 newTargetPos = transform.position + SetNewMoveVector(SetNewDirection());
+        Vector3 newTargetPos = transform.position + GetNewMoveVector(SetNewDirection());
         _agent.SetDestination(newTargetPos);
     }
     #endregion
@@ -69,7 +69,7 @@ public class Sheep : MonoBehaviour, IShootable
         {
             Debug.Log("Inside Radius");
             Vector3 oppositeDirection = (transform.position - point).normalized;
-            Vector3 newTargetPos = transform.position + SetNewMoveVector(oppositeDirection);
+            Vector3 newTargetPos = transform.position + GetNewMoveVector(oppositeDirection);
             _agent.speed = _fearSpeed;
             _agent.SetDestination(newTargetPos);
         }
@@ -86,7 +86,7 @@ public class Sheep : MonoBehaviour, IShootable
         {
             Debug.Log("Inside Radius");
             Vector3 oppositeDirection = (transform.position - _testPoint.position).normalized;
-            Vector3 newTargetPos = transform.position + SetNewMoveVector(oppositeDirection);
+            Vector3 newTargetPos = transform.position + GetNewMoveVector(oppositeDirection);
             _agent.speed = _fearSpeed;
             _agent.SetDestination(newTargetPos);
         }
