@@ -62,7 +62,7 @@ namespace Player
 
         public Transform GetTransform()
         {
-            return transform;
+            return graphics;
         }
 
         public void NotifyBushEnter()
@@ -101,7 +101,7 @@ namespace Player
         {
             get
             {
-                if (isHiddenInBush) return false;
+                if (shootableType == ShootableType.Hidden) return false;
                 
                 if(shepherdAI.AggroMeter >= 50) return true;
                 
@@ -114,12 +114,12 @@ namespace Player
             rb = GetComponent<Rigidbody>();
         }
 
-        public Sheep GetSheepSphereCast()
+        public Sheep GetSheepInSphereCast()
         {
-            if (Physics.SphereCast(transform.position, playerSO.DetectionRadius, transform.forward, out RaycastHit hit, playerSO.DetectionRange))
+            if (Physics.SphereCast(transform.position, playerSO.DetectionRadius, graphics.forward, out RaycastHit hit, playerSO.DetectionRange))
             {
                 Sheep sheep = hit.collider.GetComponent<Sheep>();
-                if (sheep != null)
+                if (sheep)
                 {
                     return sheep;
                 }

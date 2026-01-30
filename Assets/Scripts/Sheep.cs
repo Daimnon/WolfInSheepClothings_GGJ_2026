@@ -205,10 +205,10 @@ public class Sheep : MonoBehaviour, IShootable
     }
     #endregion
 
-    private void Die()
+    public void Die()
     {
-        GameManager.OnSheepKilled.Invoke(transform.position);
-        GameManager.UpdateSheepCount.Invoke();
+        GameManager.OnSheepKilled?.Invoke(transform.position);
+        GameManager.UpdateSheepCount?.Invoke();
         _agent.enabled = false;
     }
 
