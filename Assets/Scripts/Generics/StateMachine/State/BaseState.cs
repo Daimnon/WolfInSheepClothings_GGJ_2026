@@ -5,13 +5,9 @@ namespace Generics
     {
         public IUpdatingParent UpdatingParent { get; set; }
         protected IStateMachine StateMachine { get; set; }
-
-        private readonly bool isInterruptible;
-        bool IState.IsInterruptible => isInterruptible;
-
-        protected BaseState(IStateMachine stateMachine, bool isInterruptible = true)
+        
+        protected BaseState(IStateMachine stateMachine)
         {
-            this.isInterruptible = isInterruptible;
             StateMachine = stateMachine;
             UpdatingParent = UpdatingManager.Instance;
         }
