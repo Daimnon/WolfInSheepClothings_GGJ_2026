@@ -44,6 +44,11 @@ namespace Generics
             current.State.NewInputUpdate(inputCommand);
         }
 
+        public void NotifyChangeInShootableType(ShootableType newType)
+        {
+            StateMachineController.NotifyChangeInShootableType(newType);
+        }
+
         private void CheckForNextState()
         {
             var transition = GetTransition();

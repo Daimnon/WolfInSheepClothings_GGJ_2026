@@ -1,4 +1,6 @@
 
+using System;
+
 namespace Generics
 {
     public interface IStateMachine
@@ -11,5 +13,7 @@ namespace Generics
         public ITransition GetTransition();
         public void Start();
         public void PassInput(InputCommand inputCommand);
+        public void NotifyChangeInShootableType(ShootableType newType);
+
     }
 }
