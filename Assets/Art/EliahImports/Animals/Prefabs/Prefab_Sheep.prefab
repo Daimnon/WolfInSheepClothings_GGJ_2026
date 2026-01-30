@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6213917762644695821}
   - component: {fileID: 976754064366551724}
   - component: {fileID: 2030959483984822250}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Prefab_Sheep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,6 +256,10 @@ PrefabInstance:
     - target: {fileID: -3887185075125053422, guid: ecb9f48876ab88240a20c3457e6052bc, type: 3}
       propertyPath: 'm_BlendShapeWeights.Array.data[7]'
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ecb9f48876ab88240a20c3457e6052bc, type: 3}
+      propertyPath: 'm_BlendShapeWeights.Array.data[8]'
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ecb9f48876ab88240a20c3457e6052bc, type: 3}
       propertyPath: m_Name
