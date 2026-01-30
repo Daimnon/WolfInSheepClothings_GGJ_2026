@@ -13,4 +13,9 @@ public static class RigidbodyUtility
     {
         _playerRb.AddForce(direction.normalized * magnitude, ForceMode.Impulse);
     }
+    
+    public static void Initialize(Rigidbody playerRb)
+    {
+        _playerRb = playerRb;
+    }
 }

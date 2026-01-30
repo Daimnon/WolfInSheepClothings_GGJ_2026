@@ -4,7 +4,7 @@ namespace Player.State_Concretions
 {
     public class StainState: BaseState
     {
-        public StainState(IStateMachine stateMachine, PlayerSO playerSO) : base(stateMachine, playerSO)
+        public StainState(StateMachine stateMachine, PlayerSO playerSO) : base(stateMachine, playerSO)
         {
         }
 

@@ -5,7 +5,7 @@ namespace Player.State_Concretions
 {
     public class HideState : BaseState
     {
-        public HideState(IStateMachine stateMachine, PlayerSO playerSO) : base(stateMachine, playerSO)
+        public HideState(StateMachine stateMachine, PlayerSO playerSO) : base(stateMachine, playerSO)
         {
         }
         

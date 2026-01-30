@@ -5,7 +5,7 @@ namespace Player.State_Concretions
     public class AttackState : BaseState
     {
         private float timer = 0;
-        public AttackState(IStateMachine stateMachine, PlayerSO playerSO) : base(stateMachine, playerSO)
+        public AttackState(StateMachine stateMachine, PlayerSO playerSO) : base(stateMachine, playerSO)
         {
         }
         
