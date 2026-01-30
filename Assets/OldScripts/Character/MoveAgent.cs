@@ -25,7 +25,7 @@ public class MoveAgent : MonoBehaviour
 
     private void Awake()
     {
-        PlayerInputMethods.OnInputPerformed += SendInputToAgent;
+        //PlayerControlsHandler.OnInputPerformed += SendInputToAgent;
         agent.autoTraverseOffMeshLink = false;
     }
 
