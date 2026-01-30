@@ -4,12 +4,21 @@ using UnityEngine.AI;
 
 public class Sheep : MonoBehaviour, IShootable
 {
+    [Header("Movements")]
     [SerializeField] private NavMeshAgent _agent;
-    [SerializeField] private float _moveSpeed = 4.0f;
+    [SerializeField] private float _moveSpeed = 2.0f;
     [SerializeField] private float _minMoveDistance = 2.0f;
     [SerializeField] private float _maxMoveDistance = 5.0f;
-    [SerializeField] private float _fearSpeed = 8.0f;
-    [SerializeField] private float _fearRadius = 3.0f;
+    [SerializeField] private float _fearSpeed = 6.0f;
+    [SerializeField] private float _fearRadius = 6.0f;
+
+    [Header("Unstuck Settings")]
+    [SerializeField] private float _stuckCheckInterval = 1.0f;
+    [SerializeField] private float _minDistanceProgress = 0.15f;
+    private Coroutine _stuckCoroutine;
+
+    [Header("Staining")]
+    [SerializeField] private bool _isStained = false;
 
     [Header("Debugging")]
     [SerializeField] private Transform _testPoint;
@@ -29,6 +38,10 @@ public class Sheep : MonoBehaviour, IShootable
     {
         Debug.Log("GotShot");
     }
+    public bool IsStained()
+    {
+        return _isStained;
+    }
     #endregion
 
     #region Set New Destination
@@ -45,7 +58,9 @@ public class Sheep : MonoBehaviour, IShootable
         float newMagnitude = Random.Range(_minMoveDistance, _maxMoveDistance);
         Vector3 newTargetPos = direction * newMagnitude;
         _moveVector = newTargetPos;
+        StartStuckCheck();
         return newTargetPos;
+
     }
 
     [ContextMenu("SetNewDestination")]
@@ -96,6 +111,64 @@ public class Sheep : MonoBehaviour, IShootable
         }
     }
     #endregion
+
+    #region Unstuck
+    private IEnumerator CheckIfStuckRoutine()
+    {
+        Vector3 lastPosition = transform.position;
+
+        while (true)
+        {
+            yield return new WaitForSeconds(_stuckCheckInterval);
+
+            if (!_agent.hasPath || _agent.remainingDistance <= _agent.stoppingDistance)
+            {
+                StopStuckCheck();
+                yield break;
+            }
+
+            float movedDistance = (transform.position - lastPosition).magnitude;
+
+            if (movedDistance < _minDistanceProgress)
+            {
+                OnStuck();
+                yield break;
+            }
+
+            lastPosition = transform.position;
+        }
+    }
+    private void StartStuckCheck()
+    {
+        StopStuckCheck();
+        _stuckCoroutine = StartCoroutine(CheckIfStuckRoutine());
+    }
+    private void StopStuckCheck()
+    {
+        if (_stuckCoroutine != null)
+        {
+            StopCoroutine(_stuckCoroutine);
+            _stuckCoroutine = null;
+        }
+    }
+    private void OnStuck()
+    {
+        Debug.Log("Sheep is stuck, recovering.");
+        _agent.ResetPath();
+    }
+    #endregion
+
+    #region Staining
+    public void SetStained()
+    {
+        _isStained = true;
+    }
+    #endregion
+
+    private void Die()
+    {
+
+    }
 
     private void OnDrawGizmos()
     {

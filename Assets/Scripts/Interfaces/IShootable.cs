@@ -4,4 +4,5 @@ public interface IShootable
 {
     public GameObject GetGameObj();
     public void GotShot();
+    public bool IsStained();
 }
