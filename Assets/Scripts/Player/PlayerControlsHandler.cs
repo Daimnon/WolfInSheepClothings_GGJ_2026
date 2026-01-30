@@ -11,8 +11,8 @@ public class PlayerControlsHandler: MonoBehaviour
     
     private readonly Dictionary<InputType,InputCommand> playerInputs = new Dictionary<InputType, InputCommand>();
     
-    Vector2 lookVector = Vector2.zero;
-    Vector2 moveVector = Vector2.zero;
+    public Vector2 lookVector = Vector2.zero;
+    public Vector2 moveVector = Vector2.zero;
 
     // private void Awake()
     // {

@@ -33,7 +33,7 @@ namespace Player.State_Concretions
         
         public override void NewInputUpdate(InputCommand inputCommand)
         {
-            if (inputCommand.inputType == InputType.Hide && inputCommand.phase == InputActionPhase.Canceled)
+            if (inputCommand is { inputType: InputType.Hide, phase: InputActionPhase.Canceled })
             {
                 StateMachine.NotifyEndBehaviour();
             }

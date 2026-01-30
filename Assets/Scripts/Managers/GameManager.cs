@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public enum ShootableType
@@ -17,9 +18,31 @@ public class GameManager : MonoBehaviour
 
     [Header("Timer")]
     [SerializeField] private float _timerDuration = 300.0f; // 300 = 5 mins
+    [SerializeField] private ShepherdAI _shepherd;
     private float _currentTimeLeft = 0.0f;
     private Coroutine _timerCoroutine = null;
     public static Action OnGameTimerEnd;
+
+    [Header("Events")]
+    public static Action<Vector3> OnSheepKilled;
+    public static Action UpdateSheepCount;
+    
+    [Header("UI")]
+    public TMP_Text timerText;
+    public TMP_Text sheepCountText;
+    public TMP_Text aggroMeter;
+    
+    public static int sheepCount = 0;
+
+    private void OnEnable()
+    {
+        UpdateSheepCount += HandleSheepKilled;
+    }
+
+    private void OnDisable()
+    {
+        UpdateSheepCount -= HandleSheepKilled;
+    }
 
     private void Awake()
     {
@@ -31,6 +54,13 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
         }
+    }
+    
+    private void Start()
+    {
+        StartTimer();
+        sheepCountText.text = ("Sheep killed: " + sheepCount);
+        aggroMeter.text = ("Aggro meter: " + _shepherd.AggroMeter.ToString("0%"));
     }
 
     #region Timer Methods
@@ -48,7 +78,7 @@ public class GameManager : MonoBehaviour
 
             timeRemaining = Mathf.Max(timeRemaining, 0f);
             _currentTimeLeft = timeRemaining;
-            Debug.Log(timeRemaining);
+            //Debug.Log(timeRemaining);
 
             yield return null; // wait one frame
         }
@@ -60,5 +90,18 @@ public class GameManager : MonoBehaviour
         OnGameTimerEnd?.Invoke();
         Debug.Log("Event: OnGameTimerEnd");
     }
+
+    private void Update()
+    {
+        timerText.text = ("Timer: " + _currentTimeLeft.ToString("0.0"));
+        aggroMeter.text = ("Aggro meter: " + _shepherd.AggroMeter);
+    }
+
+    private void HandleSheepKilled()
+    {
+        sheepCount++;
+        sheepCountText.text = ("Sheep killed: " + sheepCount);
+    }
+    
     #endregion
 }

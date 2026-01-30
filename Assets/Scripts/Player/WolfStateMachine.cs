@@ -20,6 +20,14 @@ namespace Player
             AddState(attackState, attackState.GetType());
             AddAnyTransition(attackState.GetType(), new FuncPredicate(() => playerControlsHandler.IsInputTypeActive(InputType.Attack)));
             
+            var hideState = new HideState(this, playerSO);
+            AddState(hideState, hideState.GetType());
+            AddAnyTransition(hideState.GetType(), new FuncPredicate(() => playerControlsHandler.IsInputTypeActive(InputType.Hide)));
+            
+            var stainState = new StainState(this, playerSO);
+            AddState(stainState, stainState.GetType());
+            AddAnyTransition(stainState.GetType(), new FuncPredicate(() => playerControlsHandler.IsInputTypeActive(InputType.Stain)));
+            
             SetState(locomotionState);
         }
     }
