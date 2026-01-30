@@ -23,7 +23,7 @@ namespace Generics
         
         public bool IsAlive { get; private set; }
         
-        protected StateMachine(IStateMachineController stateMachineController, PlayerControlsHandler playerControlsHandler)
+        protected StateMachine(IStateMachineController stateMachineController, PlayerControlsHandler playerControlsHandler, PlayerSO playerSO)
         {
             this.StateMachineController = stateMachineController;
             this.PlayerControlsHandler = playerControlsHandler;

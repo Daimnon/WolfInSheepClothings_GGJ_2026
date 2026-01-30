@@ -4,7 +4,7 @@ namespace Player.State_Concretions
 {
     public class SprintState: BaseState
     {
-        public SprintState(IStateMachine stateMachine) : base(stateMachine)
+        public SprintState(IStateMachine stateMachine, PlayerSO playerSO) : base(stateMachine, playerSO)
         {
         }
 

@@ -6,7 +6,7 @@ namespace Generics
         public IUpdatingParent UpdatingParent { get; set; }
         protected IStateMachine StateMachine { get; set; }
         
-        protected BaseState(IStateMachine stateMachine)
+        protected BaseState(IStateMachine stateMachine, PlayerSO playerSO)
         {
             StateMachine = stateMachine;
             UpdatingParent = UpdatingManager.Instance;
