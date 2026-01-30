@@ -9,6 +9,7 @@ namespace Player
         [SerializeField] private Rigidbody rb;
         [SerializeField] private PlayerControlsHandler playerControlsHandler;
         [SerializeField] private PlayerSO playerSO;
+        [SerializeField] private float turnForce;
         private WolfStateMachine stateMachine;
         private ShootableType shootableType;
         private bool isHiddenInBush = false;
@@ -107,12 +108,24 @@ namespace Player
             }
             return null;
         }
-        
+
         // private void Update()
         // {
         //     RotateToMoveInput(playerSO.RotationLerpSpeed);
         // }
+        private void FixedUpdate()
+        {
+            Rotate();
+        }
+        private void Rotate()
+        {
+            if (Mathf.Abs(MoveInput.x) < 0.01f)
+                return;
 
+            float direction = Mathf.Sign(MoveInput.x);
+            rb.AddTorque(Vector3.up * direction * turnForce, ForceMode.Force);
+            rb.angularDamping = 5f;
+        }
         // private void RotateToMoveInput(float lerpSpeed = 10f)
         // {
         //     var input = MoveInput;
