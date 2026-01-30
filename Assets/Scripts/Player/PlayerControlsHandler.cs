@@ -14,12 +14,12 @@ public class PlayerControlsHandler: MonoBehaviour
     Vector2 lookVector = Vector2.zero;
     Vector2 moveVector = Vector2.zero;
 
-    private void Awake()
-    {
-        OnInput += TesterMethod;
-        MoveVectorEvent += TesterMethodMove;
-        LookVectorEvent += TesterMethodLook;
-    }
+    // private void Awake()
+    // {
+    //     OnInput += TesterMethod;
+    //     MoveVectorEvent += TesterMethodMove;
+    //     LookVectorEvent += TesterMethodLook;
+    // }
 
     private void TesterMethod(InputCommand inputCommand)
     {
@@ -99,10 +99,21 @@ public class PlayerControlsHandler: MonoBehaviour
         }
     }
 
-    public InputCommand GetLatestPhaseOfInputType(InputType inputType)
+    public InputActionPhase GetLatestPhaseOfInputType(InputType inputType)
     {
-        return playerInputs.TryGetValue(inputType, out var input) ? input : new InputCommand(inputType, InputActionPhase.Canceled);
+        return playerInputs.TryGetValue(inputType, out var input) ? input.phase : InputActionPhase.Canceled;
     }
+
+    public bool IsInputTypeActive(InputType inputType)
+    {
+        return playerInputs.ContainsKey(inputType);
+    }
+
+    public bool IsNoInputActive()
+    {
+        return playerInputs.Count == 0;
+    }
+    
 }
 public struct InputCommand
 {
