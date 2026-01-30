@@ -2,6 +2,13 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+public enum ShootableType
+{
+    Wolf,
+    Sheep,
+    BloodySheep
+}
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance = null;
