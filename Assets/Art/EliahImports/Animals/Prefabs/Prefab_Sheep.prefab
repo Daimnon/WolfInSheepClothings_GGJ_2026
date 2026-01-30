@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8154877752104567975}
   - component: {fileID: 2658303017506778744}
   - component: {fileID: 6213917762644695821}
+  - component: {fileID: 976754064366551724}
+  - component: {fileID: 2030959483984822250}
   m_Layer: 0
   m_Name: Prefab_Sheep
   m_TagString: Untagged
@@ -127,6 +129,50 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &976754064366551724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039577632872626818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb00af81d904fe47905c194716b1705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BobEffect3D
+  _bobHeight: 0.1
+  _bobSpeed: 10
+  _rb: {fileID: 2030959483984822250}
+  _visualTransform: {fileID: 8032561938207856461}
+  _particleSystem: {fileID: 8504085193778378795, guid: 8a3a9f94be385a841a8a6a9ead18bafa, type: 3}
+--- !u!54 &2030959483984822250
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039577632872626818}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &7562632270424486054
 PrefabInstance:
   m_ObjectHideFlags: 0
