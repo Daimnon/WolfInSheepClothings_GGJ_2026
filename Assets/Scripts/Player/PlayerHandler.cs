@@ -13,6 +13,10 @@ namespace Player
         private ShootableType shootableType;
         private bool isHiddenInBush = false;
         private bool isBloody = false;
+        
+        public Vector2 MoveInput => playerControlsHandler != null ? playerControlsHandler.moveVector : Vector2.zero;
+        public Vector2 LookInput => playerControlsHandler != null ? playerControlsHandler.lookVector : Vector2.zero;
+        public Vector3 lastLookDirection;
 
         public static event Action<Vector3> OnSheepKilled;
 
@@ -47,6 +51,11 @@ namespace Player
                     shootableType = newType;
                     break;
             }
+        }
+
+        public Transform GetTransform()
+        {
+            return transform;
         }
 
         public void NotifyBushEnter()
@@ -85,5 +94,38 @@ namespace Player
         {
             rb = GetComponent<Rigidbody>();
         }
+
+        public Sheep GetSheepSphereCast()
+        {
+            if (Physics.SphereCast(transform.position, playerSO.DetectionRadius, transform.forward, out RaycastHit hit, playerSO.DetectionRange))
+            {
+                Sheep sheep = hit.collider.GetComponent<Sheep>();
+                if (sheep != null)
+                {
+                    return sheep;
+                }
+            }
+            return null;
+        }
+        
+        // private void Update()
+        // {
+        //     RotateToMoveInput(playerSO.RotationLerpSpeed);
+        // }
+
+        // private void RotateToMoveInput(float lerpSpeed = 10f)
+        // {
+        //     var input = MoveInput;
+        //     
+        //     var targetDir = new Vector3(input.x, 0f, input.y);
+        //     if (targetDir == Vector3.zero)
+        //         return;
+        //     lastLookDirection = targetDir;
+        //     if (targetDir.sqrMagnitude < 0.0001f)
+        //         return;
+        //
+        //     Quaternion targetRot = Quaternion.LookRotation(lastLookDirection.normalized, Vector3.up);
+        //     transform.R
+        // }
     }
 }

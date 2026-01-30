@@ -8,7 +8,7 @@ namespace Generics
     public abstract class StateMachine
     {
         // a generic state machine that can handle any type of state that implements the IState interface
-        protected IStateMachineController StateMachineController { get; private set; }
+        public IStateMachineController StateMachineController { get; private set; }
         public PlayerControlsHandler PlayerControlsHandler { get; private set; }
         
         public IState CurrentState => current.State;
@@ -22,6 +22,9 @@ namespace Generics
         private readonly List<ITransition> anyTransitions = new();
         
         public bool IsAlive { get; private set; }
+        
+        public Vector2 MoveInput => PlayerControlsHandler != null ? PlayerControlsHandler.moveVector : Vector2.zero;
+        public Vector2 LookInput => PlayerControlsHandler != null ? PlayerControlsHandler.lookVector : Vector2.zero;
         
         protected StateMachine(IStateMachineController stateMachineController, PlayerControlsHandler playerControlsHandler, PlayerSO playerSO)
         {

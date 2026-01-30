@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Generics
 {
     public interface IStateMachineController
@@ -5,6 +7,8 @@ namespace Generics
         public void NotifyStateEnter(IState state);
         
         public void NotifyChangeInShootableType(ShootableType newType);
+        
+        public Transform GetTransform();
 
     }
 }

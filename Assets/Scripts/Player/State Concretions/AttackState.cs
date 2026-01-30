@@ -1,4 +1,5 @@
 using Generics;
+using UnityEngine;
 
 namespace Player.State_Concretions
 {
@@ -13,6 +14,15 @@ namespace Player.State_Concretions
         {
             base.OnEnter();
             timer = 0;
+            var attackDirection = StateMachine.MoveInput;
+            var attackDirection3 = new Vector3(attackDirection.x, 0, attackDirection.y);
+            
+            if (attackDirection3 == Vector3.zero)
+            {
+                attackDirection3 = StateMachine.StateMachineController.GetTransform().forward;
+            }
+
+            RigidbodyUtility.AddImpulse(attackDirection3, playerSO.AttackForce);
         }
 
         public override void Tick(float deltaTime)

@@ -1,4 +1,5 @@
 using Generics;
+using UnityEngine;
 
 namespace Player.State_Concretions
 {
@@ -14,6 +15,9 @@ namespace Player.State_Concretions
 
         public override void FixedTick(float fixedDeltaTime)
         {
+            var playerMove = StateMachine.MoveInput;
+            RigidbodyUtility.AddForce(new Vector3(playerMove.x, 0, playerMove.y), playerSO.SprintForce);
+            RigidbodyUtility.EnforceMaxVelocity(playerSO.SprintMaxVelocity);
         }
     }
 }
