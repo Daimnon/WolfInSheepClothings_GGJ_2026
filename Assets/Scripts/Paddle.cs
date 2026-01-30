@@ -5,11 +5,12 @@ public class Paddle : MonoBehaviour
 {
     private const string _playerTag = "Player";
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.CompareTag(_playerTag))
+        if (other.CompareTag(_playerTag))
         {
-            collision.transform.GetComponent<PlayerHandler>().NotifyPuddleEnter();
+            other.transform.GetComponent<PlayerHandler>().NotifyPuddleEnter();
+            Debug.Log("NotifyPaddleEnter");
         }
     }
 }

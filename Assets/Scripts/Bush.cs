@@ -10,6 +10,7 @@ public class Bush : MonoBehaviour
         if (other.CompareTag(_playerTag))
         {
             other.transform.GetComponent<PlayerHandler>().NotifyBushEnter();
+            Debug.Log("NotifyBushEnter");
         }
     }
     private void OnTriggerExit(Collider other)
@@ -17,6 +18,7 @@ public class Bush : MonoBehaviour
         if (other.CompareTag(_playerTag))
         {
             other.transform.GetComponent<PlayerHandler>().NotifyBushExit();
+            Debug.Log("NotifyBushExit");
         }
     }
 }
