@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Generics;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace Player
         [SerializeField] private PlayerSO playerSO;
         [SerializeField] private ShepherdAI shepherdAI;
         [SerializeField] private float turnForce;
+        [SerializeField] private Transform graphics;
+        [SerializeField] private float rotationSpeed = 720.0f;
         private WolfStateMachine stateMachine;
         private ShootableType shootableType;
         private bool isHiddenInBush = false;
@@ -60,7 +63,12 @@ namespace Player
 
         public Transform GetTransform()
         {
-            return transform;
+            return graphics;
+        }
+
+        public void StartCheckForSheepCoroutine(InputType inputType)
+        {
+            StartCoroutine(CheckForSheepCoroutine(inputType));
         }
 
         public void NotifyBushEnter()
@@ -86,6 +94,7 @@ namespace Player
         public void GotShot()
         {
             // implement game over here
+            Destroy(gameObject);
         }
 
         public ShootableType GetShootableType()
@@ -99,7 +108,7 @@ namespace Player
         {
             get
             {
-                if (isHiddenInBush) return false;
+                if (shootableType == ShootableType.Hidden) return false;
                 
                 if(shepherdAI.AggroMeter >= 50) return true;
                 
@@ -111,50 +120,73 @@ namespace Player
         {
             rb = GetComponent<Rigidbody>();
         }
-
-        public Sheep GetSheepSphereCast()
+        
+        public IEnumerator CheckForSheepCoroutine(InputType inputType)
         {
-            if (Physics.SphereCast(transform.position, playerSO.DetectionRadius, transform.forward, out RaycastHit hit, playerSO.DetectionRange))
+            var timer = 0f;
+            var targetFound = false;
+            switch (inputType)
             {
-                Sheep sheep = hit.collider.GetComponent<Sheep>();
-                if (sheep != null)
-                {
-                    return sheep;
-                }
+                case InputType.Attack:
+                    timer = playerSO.AttackDuration * 0.5f;
+                    break;
+                case InputType.Stain:
+                    timer = playerSO.StainDuration * 0.5f;
+                    break;
             }
-            return null;
+
+            while (timer > 0f || targetFound)
+            {
+                var attackDirection = graphics.forward;
+                var playerMove3 = Quaternion.Euler(0f, 45f, 0f) * new Vector3(attackDirection.x, 0f, attackDirection.y).normalized;
+                if (Physics.SphereCast(transform.position, playerSO.DetectionRadius, playerMove3, out RaycastHit hit, playerSO.DetectionRange))
+                {
+                    if (hit.collider.gameObject.CompareTag("Sheep"))
+                    {
+                        var sheep = hit.collider.GetComponent<Sheep>();
+                        if (sheep && sheep.isAlive)
+                        {
+                            switch (inputType)
+                            {
+                                case InputType.Attack:
+                                    sheep.Die();
+                                    break;
+                                case InputType.Stain:
+                                    sheep.SetStained();
+                                    break;
+                            }
+                            targetFound = true;
+                        }
+                    }
+                }
+                timer -= Time.deltaTime;
+                yield return null;
+            }
+        }
+        
+        private void Update()
+        {
+            RotateGraphics();
         }
 
-        // private void Update()
-        // {
-        //     RotateToMoveInput(playerSO.RotationLerpSpeed);
-        // }
-        private void FixedUpdate()
+        private void RotateGraphics()
         {
-            Rotate();
-        }
-        private void Rotate()
-        {
-            if (Mathf.Abs(MoveInput.x) < 0.01f)
+            if (MoveInput.sqrMagnitude < 0.01f)
                 return;
+            // convert 2D input to 3D world direction
+            Vector3 moveDir = new Vector3(MoveInput.x, 0f, MoveInput.y).normalized;
+            var moveDirRotated = Quaternion.Euler(0f, 45f, 0f) * moveDir.normalized;
 
-            float direction = Mathf.Sign(MoveInput.x);
-            rb.AddTorque(Vector3.up * direction * turnForce, ForceMode.Force);
-            rb.angularDamping = 5f;
+
+            // calculate the target rotation
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirRotated, Vector3.up);
+
+            // rotate graphics toward target rotation
+            graphics.rotation = Quaternion.RotateTowards(
+                graphics.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
         }
-        // private void RotateToMoveInput(float lerpSpeed = 10f)
-        // {
-        //     var input = MoveInput;
-        //     
-        //     var targetDir = new Vector3(input.x, 0f, input.y);
-        //     if (targetDir == Vector3.zero)
-        //         return;
-        //     lastLookDirection = targetDir;
-        //     if (targetDir.sqrMagnitude < 0.0001f)
-        //         return;
-        //
-        //     Quaternion targetRot = Quaternion.LookRotation(lastLookDirection.normalized, Vector3.up);
-        //     transform.R
-        // }
     }
 }

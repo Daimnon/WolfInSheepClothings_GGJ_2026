@@ -30,11 +30,6 @@ public class PlayerSO : ScriptableObject
     [SerializeField] private float detectionRadius;
     public float DetectionRadius => detectionRadius;
     
-    [SerializeField] private float rotationLerpSpeed;
-    public float RotationLerpSpeed => rotationLerpSpeed;
-
-    [SerializeField] private float rotationDeadzone;
-    public float RotationDeadzone => rotationDeadzone;
 
 
 }

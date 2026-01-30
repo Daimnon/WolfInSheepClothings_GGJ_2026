@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 8154877752104567975}
   - component: {fileID: 2658303017506778744}
   - component: {fileID: 6213917762644695821}
+  - component: {fileID: 976754064366551724}
+  - component: {fileID: 2030959483984822250}
   m_Layer: 7
   m_Name: Prefab_Sheep
-  m_TagString: Untagged
+  m_TagString: Sheep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,12 +78,13 @@ MonoBehaviour:
   _minMoveDistance: 2
   _maxMoveDistance: 8
   _fearSpeed: 6
-  _fearRadius: 6
+  _fearRadius: 10
   _stuckCheckInterval: 1
   _minDistanceProgress: 0.15
-  _minWanderDelay: 2
-  _maxWanderDelay: 5
+  _minWanderDelay: 4
+  _maxWanderDelay: 8
   _testPoint: {fileID: 0}
+  isAlive: 1
 --- !u!195 &2658303017506778744
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -127,6 +130,50 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &976754064366551724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039577632872626818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb00af81d904fe47905c194716b1705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BobEffect3D
+  _bobHeight: 0.1
+  _bobSpeed: 10
+  _rb: {fileID: 2030959483984822250}
+  _visualTransform: {fileID: 8032561938207856461}
+  _particleSystem: {fileID: 8504085193778378795, guid: 8a3a9f94be385a841a8a6a9ead18bafa, type: 3}
+--- !u!54 &2030959483984822250
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039577632872626818}
+  serializedVersion: 5
+  m_Mass: 50
+  m_LinearDamping: 0
+  m_AngularDamping: 20
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
 --- !u!1001 &7562632270424486054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -210,6 +257,10 @@ PrefabInstance:
     - target: {fileID: -3887185075125053422, guid: ecb9f48876ab88240a20c3457e6052bc, type: 3}
       propertyPath: 'm_BlendShapeWeights.Array.data[7]'
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ecb9f48876ab88240a20c3457e6052bc, type: 3}
+      propertyPath: 'm_BlendShapeWeights.Array.data[8]'
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ecb9f48876ab88240a20c3457e6052bc, type: 3}
       propertyPath: m_Name

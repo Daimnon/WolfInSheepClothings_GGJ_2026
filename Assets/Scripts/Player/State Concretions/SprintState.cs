@@ -16,7 +16,9 @@ namespace Player.State_Concretions
         public override void FixedTick(float fixedDeltaTime)
         {
             var playerMove = StateMachine.MoveInput;
-            RigidbodyUtility.AddForce(new Vector3(playerMove.x, 0, playerMove.y), playerSO.SprintForce);
+            var playerMove3 = Quaternion.Euler(0f, 45f, 0f) * new Vector3(playerMove.x, 0f, playerMove.y).normalized;
+
+            RigidbodyUtility.AddForce(playerMove3, playerSO.SprintForce);
             RigidbodyUtility.EnforceMaxVelocity(playerSO.SprintMaxVelocity);
         }
     }

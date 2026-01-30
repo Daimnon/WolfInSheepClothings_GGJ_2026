@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Generics
@@ -10,7 +11,7 @@ namespace Generics
         
         public Transform GetTransform();
         
-        public Sheep GetSheepSphereCast();
+        public void StartCheckForSheepCoroutine(InputType inputType);
 
     }
 }
