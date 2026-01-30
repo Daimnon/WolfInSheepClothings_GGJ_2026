@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Generics;
 using UnityEngine;
 
@@ -65,6 +66,11 @@ namespace Player
             return graphics;
         }
 
+        public void StartCheckForSheepCoroutine(InputType inputType)
+        {
+            StartCoroutine(CheckForSheepCoroutine(inputType));
+        }
+
         public void NotifyBushEnter()
         {
             isHiddenInBush = true;
@@ -88,6 +94,7 @@ namespace Player
         public void GotShot()
         {
             // implement game over here
+            Destroy(gameObject);
         }
 
         public ShootableType GetShootableType()
@@ -113,19 +120,50 @@ namespace Player
         {
             rb = GetComponent<Rigidbody>();
         }
-
-        public Sheep GetSheepInSphereCast()
+        
+        public IEnumerator CheckForSheepCoroutine(InputType inputType)
         {
-            if (Physics.SphereCast(transform.position, playerSO.DetectionRadius, graphics.forward, out RaycastHit hit, playerSO.DetectionRange))
+            var timer = 0f;
+            var targetFound = false;
+            switch (inputType)
             {
-                Sheep sheep = hit.collider.GetComponent<Sheep>();
-                if (sheep)
-                {
-                    return sheep;
-                }
+                case InputType.Attack:
+                    timer = playerSO.AttackDuration * 0.5f;
+                    break;
+                case InputType.Stain:
+                    timer = playerSO.StainDuration * 0.5f;
+                    break;
             }
-            return null;
+
+            while (timer > 0f || targetFound)
+            {
+                var attackDirection = graphics.forward;
+                var playerMove3 = Quaternion.Euler(0f, 45f, 0f) * new Vector3(attackDirection.x, 0f, attackDirection.y).normalized;
+                if (Physics.SphereCast(transform.position, playerSO.DetectionRadius, playerMove3, out RaycastHit hit, playerSO.DetectionRange))
+                {
+                    if (hit.collider.gameObject.CompareTag("Sheep"))
+                    {
+                        var sheep = hit.collider.GetComponent<Sheep>();
+                        if (sheep && sheep.isAlive)
+                        {
+                            switch (inputType)
+                            {
+                                case InputType.Attack:
+                                    sheep.Die();
+                                    break;
+                                case InputType.Stain:
+                                    sheep.SetStained();
+                                    break;
+                            }
+                            targetFound = true;
+                        }
+                    }
+                }
+                timer -= Time.deltaTime;
+                yield return null;
+            }
         }
+        
         private void Update()
         {
             RotateGraphics();

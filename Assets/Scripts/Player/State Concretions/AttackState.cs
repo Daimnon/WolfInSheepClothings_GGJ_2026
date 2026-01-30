@@ -23,11 +23,7 @@ namespace Player.State_Concretions
                 rotatedDirection = StateMachine.StateMachineController.GetTransform().forward;
             }
 
-            var sheepInRange = StateMachine.StateMachineController.GetSheepInSphereCast();
-            if (sheepInRange && sheepInRange.isAlive)
-            {
-                sheepInRange.Die();
-            }
+            StateMachine.StateMachineController.StartCheckForSheepCoroutine(InputType.Attack);
             
             RigidbodyUtility.AddImpulse(rotatedDirection, playerSO.AttackForce);
         }
