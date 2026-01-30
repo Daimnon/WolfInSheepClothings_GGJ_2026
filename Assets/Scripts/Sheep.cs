@@ -220,6 +220,7 @@ public class Sheep : MonoBehaviour, IShootable
         _agent.enabled = false;
         isAlive = false;
         StopAllCoroutines();
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()

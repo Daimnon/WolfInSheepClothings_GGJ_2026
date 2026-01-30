@@ -66,7 +66,7 @@ public class ShepherdAI : MonoBehaviour
     void Update()
     {
         // Aggro decay when Wolf is in bush
-        if (IsWolfInBush() && aggroMeter > 0)
+        if (IsWolfInBush() && aggroMeter > 0 || !CheckIfWolfIsInFarm() && aggroMeter > 0)
         {
             aggroMeter -= aggroDecayRate * Time.deltaTime;
             aggroMeter = Mathf.Max(0, aggroMeter);
@@ -187,11 +187,13 @@ public class ShepherdAI : MonoBehaviour
     private void ChasingState()
     {
         if (player == null) return;
+        
+        deadSheepPositions.Clear();
 
         chaseTimer += Time.deltaTime;
 
         // Check if Wolf entered bush
-        if (IsWolfInBush())
+        if (IsWolfInBush() || !CheckIfWolfIsInFarm())
         {
             ChangeState(ShepherdBehaviour.AggroScouting);
             return;
@@ -525,6 +527,7 @@ public class ShepherdAI : MonoBehaviour
             if (hitTarget != null)
             {
                 hitTarget.GotShot();
+                Debug.Log($"Shot {hitTarget.GetShootableType()} at {currentTarget.GetShootableType()}");
             }
         }
     }
@@ -598,6 +601,13 @@ public class ShepherdAI : MonoBehaviour
         return randomPoint;
     }
 
+    private bool CheckIfWolfIsInFarm()
+    {
+        if (player == null) return false;
+        Bounds bounds = farmZone.bounds;
+        return bounds.Contains(player.position);
+    }
+
     private void UpdateSpeed()
     {
         // Linearly interpolate speed based on aggro
@@ -609,8 +619,10 @@ public class ShepherdAI : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(transform.position, detectionRadius);
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        Gizmos.DrawSphere(transform.position, shootingRadius);
     }
 }
 
