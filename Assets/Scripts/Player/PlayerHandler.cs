@@ -9,6 +9,7 @@ namespace Player
         [SerializeField] private Rigidbody rb;
         [SerializeField] private PlayerControlsHandler playerControlsHandler;
         [SerializeField] private PlayerSO playerSO;
+        [SerializeField] private Transform graphicsTransform;
         private WolfStateMachine stateMachine;
         private ShootableType shootableType;
         private bool isHiddenInBush = false;
@@ -55,7 +56,7 @@ namespace Player
 
         public Transform GetTransform()
         {
-            return transform;
+            return graphicsTransform;
         }
 
         public void NotifyBushEnter()
@@ -108,24 +109,24 @@ namespace Player
             return null;
         }
         
-        // private void Update()
-        // {
-        //     RotateToMoveInput(playerSO.RotationLerpSpeed);
-        // }
+        private void Update()
+        {
+            RotateToMoveInput(playerSO.RotationLerpSpeed);
+        }
 
-        // private void RotateToMoveInput(float lerpSpeed = 10f)
-        // {
-        //     var input = MoveInput;
-        //     
-        //     var targetDir = new Vector3(input.x, 0f, input.y);
-        //     if (targetDir == Vector3.zero)
-        //         return;
-        //     lastLookDirection = targetDir;
-        //     if (targetDir.sqrMagnitude < 0.0001f)
-        //         return;
-        //
-        //     Quaternion targetRot = Quaternion.LookRotation(lastLookDirection.normalized, Vector3.up);
-        //     transform.R
-        // }
+        private void RotateToMoveInput(float lerpSpeed = 10f)
+        {
+            var input = MoveInput;
+            
+            var targetDir = new Vector3(input.x, 0f, input.y);
+            if (targetDir == Vector3.zero)
+                return;
+            lastLookDirection = targetDir;
+            if (targetDir.sqrMagnitude < 0.0001f)
+                return;
+
+            Quaternion targetRot = Quaternion.LookRotation(lastLookDirection.normalized, Vector3.up);
+            graphicsTransform.rotation = Quaternion.Lerp(transform.rotation, targetRot, lerpSpeed * Time.deltaTime);
+        }
     }
 }
