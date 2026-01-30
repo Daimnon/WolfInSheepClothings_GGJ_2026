@@ -9,21 +9,24 @@ namespace Generics
     {
         // a generic state machine that can handle any type of state that implements the IState interface
         protected IStateMachineController StateMachineController { get; private set; }
+        public PlayerControlsHandler PlayerControlsHandler { get; private set; }
         
         public IState CurrentState => current.State;
         public IState PreviousState => previous.State;
         
         private StateNode current;
         private StateNode previous;
+        private StateNode defaultState;
         
         private readonly Dictionary<Type, StateNode> states = new();
         private readonly List<ITransition> anyTransitions = new();
         
         public bool IsAlive { get; private set; }
         
-        protected StateMachine(IStateMachineController stateMachineController)
+        protected StateMachine(IStateMachineController stateMachineController, PlayerControlsHandler playerControlsHandler)
         {
             this.StateMachineController = stateMachineController;
+            this.PlayerControlsHandler = playerControlsHandler;
         }
 
         public void NotifyEndBehaviour()
