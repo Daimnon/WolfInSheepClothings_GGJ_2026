@@ -345,7 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cinemachine::Cinemachine.CinemachineTargetGroup
   PositionMode: 0
   RotationMode: 1
-  UpdateMethod: 2
+  UpdateMethod: 1
   Targets:
   - Object: {fileID: 0}
     Weight: 1

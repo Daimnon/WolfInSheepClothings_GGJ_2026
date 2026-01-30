@@ -332,6 +332,8 @@ GameObject:
   - component: {fileID: 2759784815649164301}
   - component: {fileID: 8050331116952645809}
   - component: {fileID: 4652482438342191164}
+  - component: {fileID: 3896206411796193514}
+  - component: {fileID: 2562793910953153651}
   m_Layer: 0
   m_Name: Shepherd
   m_TagString: Player
@@ -404,6 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5364246d04042eba1c122fe3fa792c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShepherdAI
+  stateText: {fileID: 0}
   agent: {fileID: 8050331116952645809}
   player: {fileID: 0}
   farmZone: {fileID: 0}
@@ -411,15 +414,15 @@ MonoBehaviour:
   shootableLayer:
     serializedVersion: 2
     m_Bits: 128
-  idleTimer: 3
-  observeTimer: 2
-  maxChaseTime: 10
-  aggroIncreasePerBody: 15
+  idleTimer: 10
+  observeTimer: 5
+  maxChaseTime: 15
+  aggroIncreasePerBody: 10
   aggroDecayRate: 2
   minSpeed: 3.5
   maxSpeed: 7
-  shootingRadius: 10
-  detectionRadius: 20
+  shootingRadius: 5
+  detectionRadius: 12
   shotDamage: 100
   frenzyDuration: 8
   patrolRadius: 10
@@ -468,6 +471,51 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &3896206411796193514
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572311025963796287}
+  serializedVersion: 5
+  m_Mass: 70
+  m_LinearDamping: 0
+  m_AngularDamping: 5
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
+--- !u!114 &2562793910953153651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572311025963796287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 4
+  outlineColor: {r: 1, g: 0.8431373, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1742084491975055345
 GameObject:
   m_ObjectHideFlags: 0
