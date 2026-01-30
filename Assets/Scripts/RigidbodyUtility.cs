@@ -18,4 +18,12 @@ public static class RigidbodyUtility
     {
         _playerRb = playerRb;
     }
+    
+    public static void EnforceMaxVelocity(float maxVelocity)
+    {
+        if (_playerRb.linearVelocity.magnitude > maxVelocity)
+        {
+            _playerRb.linearVelocity = _playerRb.linearVelocity.normalized * maxVelocity;
+        }
+    }
 }

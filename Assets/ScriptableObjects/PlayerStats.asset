@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5171315f19f0baa488bbcd92c2014caa, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSO
-  normalForce: 200
-  sprintForce: 350
+  normalForce: 50
+  maxNormalVelocity: 10
+  sprintForce: 200
+  sprintMaxVelocity: 15
   attackDuration: 0.3
+  attackForce: 50
   stainDuration: 0.3
+  stainForce: 10
   eatingDurationToConsume: 1.5
