@@ -4,6 +4,8 @@ using UnityEngine.AI;
 
 public class Sheep : MonoBehaviour, IShootable
 {
+    [SerializeField] private ShootableType _shootableType = ShootableType.Sheep;
+    
     [Header("Movements")]
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private float _moveSpeed = 2.0f;
@@ -16,9 +18,6 @@ public class Sheep : MonoBehaviour, IShootable
     [SerializeField] private float _stuckCheckInterval = 1.0f;
     [SerializeField] private float _minDistanceProgress = 0.15f;
     private Coroutine _stuckCoroutine;
-
-    [Header("Staining")]
-    [SerializeField] private bool _isStained = false;
 
     [Header("Debugging")]
     [SerializeField] private Transform _testPoint;
@@ -38,9 +37,9 @@ public class Sheep : MonoBehaviour, IShootable
     {
         Debug.Log("GotShot");
     }
-    public bool IsStained()
+    public ShootableType GetShootableType()
     {
-        return _isStained;
+        return _shootableType;
     }
     #endregion
 
@@ -161,7 +160,7 @@ public class Sheep : MonoBehaviour, IShootable
     #region Staining
     public void SetStained()
     {
-        _isStained = true;
+        _shootableType = ShootableType.BloodySheep;
     }
     #endregion
 
