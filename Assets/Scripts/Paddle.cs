@@ -9,7 +9,7 @@ public class Paddle : MonoBehaviour
     {
         if (collision.CompareTag(_playerTag))
         {
-
+            collision.transform.GetComponent<PlayerHandler>().NotifyPuddleEnter();
         }
     }
 }

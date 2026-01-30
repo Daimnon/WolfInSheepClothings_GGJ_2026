@@ -1,16 +1,22 @@
+using Player;
 using UnityEngine;
 
 public class Bush : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private const string _playerTag = "Player";
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag(_playerTag))
+        {
+            other.transform.GetComponent<PlayerHandler>().NotifyBushEnter();
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(_playerTag))
+        {
+            other.transform.GetComponent<PlayerHandler>().NotifyBushExit();
+        }
     }
 }
