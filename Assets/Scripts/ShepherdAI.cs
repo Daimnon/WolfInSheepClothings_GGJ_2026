@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class ShepherdAI : MonoBehaviour
 {
+    [SerializeField] private TMP_Text stateText;
+    
     [Header("References")]
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform player; // The Wolf
@@ -96,6 +100,8 @@ public class ShepherdAI : MonoBehaviour
                 ReturningState();
                 break;
         }
+        
+        stateText.text = currentState.ToString();
     }
 
     #region State Handlers
@@ -127,7 +133,7 @@ public class ShepherdAI : MonoBehaviour
     {
         if (deadSheepPositions.Count == 0)
         {
-            ChangeState(ShepherdBehaviour.AggroScouting);
+            ChangeState(aggroMeter >= 50 ? ShepherdBehaviour.AggroScouting : ShepherdBehaviour.Returning);
             return;
         }
 
@@ -157,7 +163,23 @@ public class ShepherdAI : MonoBehaviour
             }
             else
             {
-                ChangeState(ShepherdBehaviour.AggroScouting);
+                // No target found at body
+                if (deadSheepPositions.Count > 0)
+                {
+                    // More bodies to investigate, go to next one
+                    agent.SetDestination(deadSheepPositions[0]);
+                    // Stay in Running state
+                }
+                else if (aggroMeter >= 50)
+                {
+                    // No more bodies, high aggro -> scout for Wolf
+                    ChangeState(ShepherdBehaviour.AggroScouting);
+                }
+                else
+                {
+                    // No more bodies, low aggro -> return home
+                    ChangeState(ShepherdBehaviour.Returning);
+                }
             }
         }
     }
@@ -237,7 +259,19 @@ public class ShepherdAI : MonoBehaviour
             }
             else
             {
-                ChangeState(ShepherdBehaviour.AggroScouting);
+                // Check dead sheep queue first (low aggro priority)
+                if (deadSheepPositions.Count > 0 && aggroMeter < 50)
+                {
+                    ChangeState(ShepherdBehaviour.Running);
+                }
+                else if (aggroMeter >= 50)
+                {
+                    ChangeState(ShepherdBehaviour.AggroScouting);
+                }
+                else
+                {
+                    ChangeState(ShepherdBehaviour.Returning);
+                }
             }
         }
     }
@@ -259,10 +293,17 @@ public class ShepherdAI : MonoBehaviour
             ChangeState(ShepherdBehaviour.Chasing);
         }
 
-        // Exit aggro scout if aggro drops
+        // Exit aggro scout if aggro drops below 50
         if (aggroMeter < 50)
         {
-            ChangeState(ShepherdBehaviour.Returning);
+            if (deadSheepPositions.Count > 0)
+            {
+                ChangeState(ShepherdBehaviour.Running);
+            }
+            else
+            {
+                ChangeState(ShepherdBehaviour.Returning);
+            }
         }
     }
 
@@ -340,10 +381,14 @@ public class ShepherdAI : MonoBehaviour
             // Low aggro: Add to investigation list
             deadSheepPositions.Add(position);
 
-            if (currentState == ShepherdBehaviour.Idle || currentState == ShepherdBehaviour.Observing)
+            // Transition to Running from low-priority states
+            if (currentState == ShepherdBehaviour.Idle ||
+                currentState == ShepherdBehaviour.Observing ||
+                currentState == ShepherdBehaviour.Returning)
             {
                 ChangeState(ShepherdBehaviour.Running);
             }
+            // If already Running/Shooting/AggroScouting, just add to queue
         }
     }
 
@@ -412,44 +457,60 @@ public class ShepherdAI : MonoBehaviour
 
     private IShootable SelectTargetWeighted(List<IShootable> targets)
     {
-        List<IShootable> wolves = new List<IShootable>();
-        List<IShootable> bloodySheep = new List<IShootable>();
-        List<IShootable> normalSheep = new List<IShootable>();
-
+        // First pass: Check for Wolf - instant shoot if detected
         foreach (IShootable target in targets)
         {
-            switch (target.GetShootableType())
+            if (target.GetShootableType() == ShootableType.Wolf)
             {
-                case ShootableType.Wolf:
-                    wolves.Add(target);
-                    break;
-                case ShootableType.BloodySheep:
-                    bloodySheep.Add(target);
-                    break;
-                case ShootableType.Sheep:
-                    normalSheep.Add(target);
-                    break;
+                return target; // Shoot Wolf immediately
             }
         }
 
-        // Weighted random: Wolf 30%, Bloody 20%, Normal 50%
-        float roll = Random.value * 100f;
+        // Second pass: Calculate total weight for sheep
+        int totalWeight = 0;
+        foreach (IShootable target in targets)
+        {
+            ShootableType type = target.GetShootableType();
+            if (type == ShootableType.BloodySheep)
+            {
+                totalWeight += 2; // Bloody sheep = 2 points
+            }
+            else if (type == ShootableType.Sheep)
+            {
+                totalWeight += 1; // Normal sheep = 1 point
+            }
+        }
 
-        if (roll < 30f && wolves.Count > 0)
+        if (totalWeight == 0) return null;
+
+        // Random selection based on weight
+        int randomNum = Random.Range(1, totalWeight + 1);
+
+        // Third pass: Select target based on weighted random
+        foreach (IShootable target in targets)
         {
-            return wolves[Random.Range(0, wolves.Count)];
-        }
-        else if (roll < 50f && bloodySheep.Count > 0)
-        {
-            return bloodySheep[Random.Range(0, bloodySheep.Count)];
-        }
-        else if (normalSheep.Count > 0)
-        {
-            return normalSheep[Random.Range(0, normalSheep.Count)];
+            ShootableType type = target.GetShootableType();
+            int weight = 0;
+
+            if (type == ShootableType.BloodySheep)
+            {
+                weight = 2;
+            }
+            else if (type == ShootableType.Sheep)
+            {
+                weight = 1;
+            }
+
+            randomNum -= weight;
+
+            if (randomNum <= 0)
+            {
+                return target; // Shoot this target
+            }
         }
 
-        // Fallback: return any
-        return targets[Random.Range(0, targets.Count)];
+        // Fallback: return first target
+        return targets[0];
     }
 
     private void FireShotgun()
@@ -545,6 +606,11 @@ public class ShepherdAI : MonoBehaviour
     }
 
     #endregion
+
+    private void OnDrawGizmos()
+    {
+        
+    }
 }
 
 enum ShepherdBehaviour
