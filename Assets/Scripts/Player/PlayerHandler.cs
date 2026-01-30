@@ -9,7 +9,7 @@ namespace Player
         [SerializeField] private Rigidbody rb;
         [SerializeField] private PlayerControlsHandler playerControlsHandler;
         [SerializeField] private PlayerSO playerSO;
-        [SerializeField] private Transform graphicsTransform;
+        [SerializeField] private float turnForce;
         private WolfStateMachine stateMachine;
         private ShootableType shootableType;
         private bool isHiddenInBush = false;
@@ -56,7 +56,7 @@ namespace Player
 
         public Transform GetTransform()
         {
-            return graphicsTransform;
+            return transform;
         }
 
         public void NotifyBushEnter()
@@ -108,25 +108,37 @@ namespace Player
             }
             return null;
         }
-        
-        private void Update()
-        {
-            RotateToMoveInput(playerSO.RotationLerpSpeed);
-        }
 
-        private void RotateToMoveInput(float lerpSpeed = 10f)
+        // private void Update()
+        // {
+        //     RotateToMoveInput(playerSO.RotationLerpSpeed);
+        // }
+        private void FixedUpdate()
         {
-            var input = MoveInput;
-            
-            var targetDir = new Vector3(input.x, 0f, input.y);
-            if (targetDir == Vector3.zero)
-                return;
-            lastLookDirection = targetDir;
-            if (targetDir.sqrMagnitude < 0.0001f)
+            Rotate();
+        }
+        private void Rotate()
+        {
+            if (Mathf.Abs(MoveInput.x) < 0.01f)
                 return;
 
-            Quaternion targetRot = Quaternion.LookRotation(lastLookDirection.normalized, Vector3.up);
-            graphicsTransform.rotation = Quaternion.Lerp(transform.rotation, targetRot, lerpSpeed * Time.deltaTime);
+            float direction = Mathf.Sign(MoveInput.x);
+            rb.AddTorque(Vector3.up * direction * turnForce, ForceMode.Force);
+            rb.angularDamping = 5f;
         }
+        // private void RotateToMoveInput(float lerpSpeed = 10f)
+        // {
+        //     var input = MoveInput;
+        //     
+        //     var targetDir = new Vector3(input.x, 0f, input.y);
+        //     if (targetDir == Vector3.zero)
+        //         return;
+        //     lastLookDirection = targetDir;
+        //     if (targetDir.sqrMagnitude < 0.0001f)
+        //         return;
+        //
+        //     Quaternion targetRot = Quaternion.LookRotation(lastLookDirection.normalized, Vector3.up);
+        //     transform.R
+        // }
     }
 }
