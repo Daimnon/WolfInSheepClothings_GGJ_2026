@@ -8,10 +8,10 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "a1233b6a-2bcf-4b69-806b-0ad20c174f30",
                     "expectedControlType": "Vector2",
-                    "processors": "NormalizeVector2",
+                    "processors": "StickDeadzone",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -39,7 +39,7 @@
                     "id": "ba101496-dea8-465b-b12a-7943a78d74af",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "MultiTap",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -50,57 +50,86 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Hide",
+                    "type": "Button",
+                    "id": "50524599-ad00-46c1-96e5-d142344608d1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "7f78fd4d-f999-4115-80a1-d73805f95426",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "a6e8f41f-1368-488d-9a35-f4bdce1b9ad6",
+                    "name": "2D Vector",
+                    "id": "e6fc6001-4eb2-44dc-97c9-3ba6866c514d",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "c4699bf2-18d8-4df3-9d95-98c1cf16cac7",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": ";KBM",
                     "action": "Move",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "48e427cd-a2ea-4a94-9250-240c462daa17",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";KBM",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3383f837-1d08-4f3c-aea2-0762e75e7d81",
+                    "name": "down",
+                    "id": "981dae09-9866-4ca5-85a2-816f413713fe",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": ";KBM",
                     "action": "Move",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "5d7407e5-c4b6-409f-b54c-07ecf8d33748",
+                    "name": "left",
+                    "id": "06ac65d4-76a1-4d14-aa2c-680a8318c97a",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KBM",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "6f77bf53-c0f3-4729-b912-b3d2bef1b9b6",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": ";KBM",
                     "action": "Move",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
-                    "id": "7c85f631-7e00-45e5-a64b-14aadaebf62d",
-                    "path": "<Gamepad>/leftStick/left",
+                    "id": "91613611-2806-449c-8216-b333ee94f442",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -187,17 +216,6 @@
                 },
                 {
                     "name": "",
-                    "id": "b61ced65-aec6-4587-b028-2a107670ca61",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Eat",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "245f7230-1a62-4ce8-b60b-1e99d7a9e4a9",
                     "path": "<Keyboard>/f",
                     "interactions": "",
@@ -210,11 +228,55 @@
                 {
                     "name": "",
                     "id": "ce0da4a1-00e4-43bd-8e39-95230d835d4d",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Stain",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7384ab62-7484-4e9c-a7a8-3cb953e3f00f",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KBM",
+                    "action": "Hide",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7dedf268-fd43-4a9f-b098-c37bf0f90cc8",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Hide",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f9590b0-2041-42e9-847c-cb10704f4b02",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KBM",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dae9c739-d221-40ef-97ea-47c52c0f8b43",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
