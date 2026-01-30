@@ -187,11 +187,13 @@ public class ShepherdAI : MonoBehaviour
     private void ChasingState()
     {
         if (player == null) return;
+        
+        deadSheepPositions.Clear();
 
         chaseTimer += Time.deltaTime;
 
         // Check if Wolf entered bush
-        if (IsWolfInBush())
+        if (IsWolfInBush() || !CheckIfWolfIsInFarm())
         {
             ChangeState(ShepherdBehaviour.AggroScouting);
             return;
@@ -601,6 +603,7 @@ public class ShepherdAI : MonoBehaviour
 
     private bool CheckIfWolfIsInFarm()
     {
+        if (player == null) return false;
         Bounds bounds = farmZone.bounds;
         return bounds.Contains(player.position);
     }
