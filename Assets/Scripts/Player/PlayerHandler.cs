@@ -11,6 +11,8 @@ namespace Player
         [SerializeField] private PlayerSO playerSO;
         [SerializeField] private ShepherdAI shepherdAI;
         [SerializeField] private float turnForce;
+        [SerializeField] private Transform graphics;
+        [SerializeField] private float rotationSpeed = 720.0f;
         private WolfStateMachine stateMachine;
         private ShootableType shootableType;
         private bool isHiddenInBush = false;
@@ -124,37 +126,27 @@ namespace Player
             }
             return null;
         }
-
-        // private void Update()
-        // {
-        //     RotateToMoveInput(playerSO.RotationLerpSpeed);
-        // }
-        private void FixedUpdate()
+        private void Update()
         {
-            Rotate();
+            RotateGraphics();
         }
-        private void Rotate()
+
+        private void RotateGraphics()
         {
-            if (Mathf.Abs(MoveInput.x) < 0.01f)
+            if (MoveInput.sqrMagnitude < 0.01f)
                 return;
+            // convert 2D input to 3D world direction
+            Vector3 moveDir = new Vector3(MoveInput.x, 0f, MoveInput.y).normalized;
 
-            float direction = Mathf.Sign(MoveInput.x);
-            rb.AddTorque(Vector3.up * direction * turnForce, ForceMode.Force);
-            rb.angularDamping = 5f;
+            // calculate the target rotation
+            Quaternion targetRotation = Quaternion.LookRotation(moveDir, Vector3.up);
+
+            // rotate graphics toward target rotation
+            graphics.rotation = Quaternion.RotateTowards(
+                graphics.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
         }
-        // private void RotateToMoveInput(float lerpSpeed = 10f)
-        // {
-        //     var input = MoveInput;
-        //     
-        //     var targetDir = new Vector3(input.x, 0f, input.y);
-        //     if (targetDir == Vector3.zero)
-        //         return;
-        //     lastLookDirection = targetDir;
-        //     if (targetDir.sqrMagnitude < 0.0001f)
-        //         return;
-        //
-        //     Quaternion targetRot = Quaternion.LookRotation(lastLookDirection.normalized, Vector3.up);
-        //     transform.R
-        // }
     }
 }
