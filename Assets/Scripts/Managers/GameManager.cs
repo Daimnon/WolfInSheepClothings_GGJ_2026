@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     {
         StartTimer();
         sheepCountText.text = ("Sheep killed: " + sheepCount);
-        aggroMeter.text = ("Aggro meter: " + _shepherd.AggroMeter.ToString("0%"));
+        aggroMeter.text = ("Aggro meter: " + _shepherd.AggroMeter.ToString("F0") + "%");
     }
 
     #region Timer Methods
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         timerText.text = ("Timer: " + _currentTimeLeft.ToString("0.0"));
-        aggroMeter.text = ("Aggro meter: " + _shepherd.AggroMeter);
+        aggroMeter.text = ("Aggro meter: " + _shepherd.AggroMeter.ToString("F0") + "%");
     }
 
     private void HandleSheepKilled()
