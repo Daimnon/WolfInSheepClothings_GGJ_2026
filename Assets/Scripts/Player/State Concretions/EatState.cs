@@ -4,7 +4,7 @@ namespace Player.State_Concretions
 {
     public class EatState : BaseState
     {
-        public EatState(IStateMachine stateMachine) : base(stateMachine)
+        public EatState(IStateMachine stateMachine, PlayerSO playerSO) : base(stateMachine, playerSO)
         {
         }
 

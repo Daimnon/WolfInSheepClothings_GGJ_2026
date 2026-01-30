@@ -4,8 +4,7 @@ namespace Player.State_Concretions
 {
     public class AttackState : BaseState
     {
-        
-        public AttackState(IStateMachine stateMachine) : base(stateMachine)
+        public AttackState(IStateMachine stateMachine, PlayerSO p1) : base(stateMachine, p1)
         {
         }
 
