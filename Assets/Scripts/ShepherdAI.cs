@@ -14,7 +14,7 @@ public class ShepherdAI : MonoBehaviour
     private const float CrossFadeDuration = 0.1f;
     
     [SerializeField] private Animator animator;
-    [SerializeField] private TMP_Text stateText;
+    //[SerializeField] private TMP_Text stateText;
 
     [Header("References")]
     [SerializeField] private NavMeshAgent agent;
