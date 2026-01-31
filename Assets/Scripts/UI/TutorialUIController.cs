@@ -11,13 +11,14 @@ namespace UI
     public class TutorialUIController : MonoBehaviour
     {
         [SerializeField] private Button ParentButton;
+        [SerializeField] private Image ParentImage;
         [SerializeField] private CanvasGroup WasdPopup;
         [SerializeField] private CanvasGroup AttackPopup;
         [SerializeField] private CanvasGroup BushPopup;
         [SerializeField] private CanvasGroup HidingPopup;
         [SerializeField] private CanvasGroup StainPopup;
         [SerializeField] private CanvasGroup ShepherdPopup;
-        
+
         [SerializeField] private float generalWaitDuration = 0.2f;
         [SerializeField] private float waitDurationOnStartUp = 1.3f;
 
@@ -42,13 +43,15 @@ namespace UI
             PlayerHandler.OnPlayerInProximityOf += PopUpAccordingToProximity;
             MainMenu.FinishedCameraPan += TriggerWasd;
             PlayerHandler.OnPlayerBloodyAndNextToSheep += TriggerStaining;
-            
+
             HideWasdPopup();
             HideAttackPopup();
             HideBushPopup();
             HideHidingPopup();
             HideStainPopup();
             HideShepherdPopup();
+            ParentButton.interactable = false;
+            ParentImage.raycastTarget = false;
 
             ParentButton.interactable = false;
             ParentButton.onClick.AddListener(() =>
@@ -59,19 +62,11 @@ namespace UI
                 HideHidingPopup();
                 HideStainPopup();
                 HideShepherdPopup();
-                
-                if (!isShepherd)
-                {
-                    ResumeGameTime();   
-                    ParentButton.interactable = false;
-                }
 
-                if (isHiding)
-                {
-                    ResumeGameTime();   
-                    ParentButton.interactable = false;
-                }
-
+                ResumeGameTime();
+                ParentButton.interactable = false;
+                ParentButton.interactable = false;
+                ParentImage.raycastTarget = false;
             });
 
 
@@ -120,6 +115,7 @@ namespace UI
                             StartCoroutine(WaitABitAndPopup(ShowBushPopup));
                         }
                     }
+
                     break;
                 case TutorialEntetyType.Shepherd:
                     if (isBush)
@@ -130,6 +126,7 @@ namespace UI
                             StartCoroutine(WaitABitAndPopup(ShowShepherdPopup));
                         }
                     }
+
                     break;
             }
         }
@@ -217,10 +214,10 @@ namespace UI
             ShepherdPopup.alpha = 0;
             ShepherdPopup.interactable = false;
             ShepherdPopup.blocksRaycasts = false;
-            if (!isShepherd) return;
-            
-            isHiding = true;
-            ShowHidingPopup();
+            //if (!isShepherd) return;
+
+            //isHiding = true;
+            //ShowHidingPopup();
         }
 
         private IEnumerator WaitABitAndPopup(Action action)
@@ -236,17 +233,18 @@ namespace UI
                 yield return new WaitForSeconds(generalWaitDuration);
             }
 
-            
+
             StopGameTime();
-            ParentButton.interactable = true;
             action.Invoke();
+            ParentButton.interactable = true;
+            ParentImage.raycastTarget = true;
         }
-        
+
         private void StopGameTime()
         {
             Time.timeScale = 0f;
         }
-        
+
         private void ResumeGameTime()
         {
             Time.timeScale = 1f;
