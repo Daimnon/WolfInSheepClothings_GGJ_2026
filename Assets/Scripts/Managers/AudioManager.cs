@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +22,6 @@ namespace Managers
 
             instance = this;
 
-
             foreach (Sound s in musicList) // instantiates all sounds 
             {
                 s.audioSource = gameObject.AddComponent<AudioSource>();
@@ -40,8 +41,33 @@ namespace Managers
                 s.audioSource.pitch = s.pitch;
                 s.audioSource.loop = s.loop;
             }
+            
+            MusicEnabled(true);
 
             DontDestroyOnLoad(gameObject);
+        }
+
+        private void Start()
+        {
+            PlaySound(SoundType.Music, "Theme"); // plays main theme at start
+            MainMenu.FinishedCameraPan += StartMusicAfterIntro;
+        }
+
+        private void StartMusicAfterIntro()
+        {
+            StartCoroutine(PlayMainThemeAfterDelay());
+        }
+        
+        private IEnumerator PlayMainThemeAfterDelay()
+        {
+            var s = GetSound(SoundType.Music, "Theme");
+            s.loop = false;
+            while (s.audioSource.isPlaying)
+            {
+                yield return null;
+            }
+
+            PlaySound(SoundType.Music, "GameTheme");
         }
 
         public void PlaySound(SoundType st, string soundName) // a function to play a sound from anywhere in the script
@@ -49,11 +75,29 @@ namespace Managers
             var sounds = st == SoundType.Music ? musicList : sfxList;
             foreach (Sound s in sounds)
             {
+                s.audioSource.Stop();
+            }
+            foreach (Sound s in sounds)
+            {
                 if (s.name == soundName)
                 {
                     s.audioSource.Play();
                 }
             }
+        }
+        
+        public Sound GetSound(SoundType st, string soundName) // a function to get a sound from anywhere in the script
+        {
+            var sounds = st == SoundType.Music ? musicList : sfxList;
+            foreach (Sound s in sounds)
+            {
+                if (s.name == soundName)
+                {
+                    return s;
+                }
+            }
+
+            return null;
         }
 
         public void SFXEnabled(bool mute)
