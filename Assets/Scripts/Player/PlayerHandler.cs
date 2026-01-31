@@ -32,6 +32,7 @@ namespace Player
         public Vector3 lastLookDirection;
 
         public static Action<TutorialEntetyType> OnPlayerInProximityOf;
+        public static Action OnPlayerBloodyAndNextToSheep;
 
         public void Awake()
         {
@@ -260,6 +261,11 @@ namespace Player
             if (other.CompareTag("Sheep"))
             {
                 OnPlayerInProximityOf?.Invoke(TutorialEntetyType.Sheep);
+
+                if (isBloody)
+                {
+                    OnPlayerBloodyAndNextToSheep?.Invoke();
+                }
             }
 
             if (other.CompareTag("Bush"))
