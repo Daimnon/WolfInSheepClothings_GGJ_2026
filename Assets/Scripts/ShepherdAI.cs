@@ -14,7 +14,6 @@ public class ShepherdAI : MonoBehaviour
     private const float CrossFadeDuration = 0.1f;
     
     [SerializeField] private Animator animator;
-    //[SerializeField] private TMP_Text stateText;
 
     [Header("References")]
     [SerializeField] private NavMeshAgent agent;
@@ -133,9 +132,6 @@ public class ShepherdAI : MonoBehaviour
             case ShepherdBehaviour.AggroScouting: AggroScoutingState(); break;
             case ShepherdBehaviour.Returning: ReturningState(); break;
         }
-
-        if (stateText != null)
-            stateText.text = currentState.ToString();
     }
 
     #region State Handlers
