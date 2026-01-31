@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Generics;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace Player
 {
@@ -10,25 +13,28 @@ namespace Player
         [SerializeField] private Rigidbody rb;
         [SerializeField] private PlayerControlsHandler playerControlsHandler;
         [SerializeField] private PlayerSO playerSO;
-        [SerializeField] private ShepherdAI shepherdAI;
         [SerializeField] private float turnForce;
         [SerializeField] private Transform graphics;
         [SerializeField] private float rotationSpeed = 720.0f;
+
+        [FormerlySerializedAs("MeshRenderer")] [SerializeField] private MeshRenderer meshRenderer;
+        [SerializeField] private List<Material> stainedWolfMaterials;
+
         private WolfStateMachine stateMachine;
         private ShootableType shootableType;
         private bool isHiddenInBush = false;
         private bool isBloody = false;
         private bool isCrouching = false;
-        
+        private int stainCount;
+
         public Vector2 MoveInput => playerControlsHandler != null ? playerControlsHandler.moveVector : Vector2.zero;
         public Vector2 LookInput => playerControlsHandler != null ? playerControlsHandler.lookVector : Vector2.zero;
         public Vector3 lastLookDirection;
 
-        public static event Action<Vector3> OnSheepKilled;
-
         public void Awake()
         {
             RigidbodyUtility.Initialize(rb);
+            stainCount = playerSO.MaxStainCount;
         }
 
         private void Start()
@@ -81,9 +87,20 @@ namespace Player
             isHiddenInBush = false;
         }
 
-        public void NotifyPuddleEnter()
+        public void NotifyPuddleEnter(PuddleType puddleType)
         {
-            isBloody = false;
+            switch (puddleType)
+            {
+                case PuddleType.Blood:
+                    isBloody = true;
+                    SwapWolfMaterialToStained();
+                    stainCount = playerSO.MaxStainCount;
+                    break;
+                case PuddleType.Water:
+                    isBloody = false;
+                    SwapWolfMaterialToNormal();
+                    break;
+            }
         }
 
         public GameObject GetGameObj()
@@ -109,10 +126,7 @@ namespace Player
             get
             {
                 if (shootableType == ShootableType.Hidden) return false;
-                
-                if(shepherdAI.AggroMeter >= 50) return true;
-                
-                return !isCrouching;
+                return true;
             }
         }
 
@@ -120,7 +134,7 @@ namespace Player
         {
             rb = GetComponent<Rigidbody>();
         }
-        
+
         public IEnumerator CheckForSheepCoroutine(InputType inputType)
         {
             var timer = 0f;
@@ -138,7 +152,8 @@ namespace Player
             while (timer > 0f && !targetFound)
             {
                 var attackDirection = graphics.forward;
-                if (Physics.SphereCast(transform.position, playerSO.DetectionRadius, attackDirection, out RaycastHit hit, playerSO.DetectionRange))
+                if (Physics.SphereCast(transform.position, playerSO.DetectionRadius, attackDirection,
+                        out RaycastHit hit, playerSO.DetectionRange))
                 {
                     if (hit.collider.gameObject.CompareTag("Sheep"))
                     {
@@ -149,20 +164,54 @@ namespace Player
                             {
                                 case InputType.Attack:
                                     sheep.Die();
+                                    isBloody = true;
+                                    SwapWolfMaterialToStained();
+                                    stainCount = playerSO.MaxStainCount;
                                     break;
                                 case InputType.Stain:
-                                    sheep.SetStained();
+                                {
+                                    if (isBloody && stainCount > 0)
+                                    {
+                                        sheep.SetStained();
+                                        stainCount--;
+                                        if (stainCount <= 0)
+                                        {
+                                            isBloody = false;
+                                            SwapWolfMaterialToNormal();
+                                        }
+                                    }
+
                                     break;
+                                }
                             }
+
                             targetFound = true;
                         }
                     }
                 }
+
                 timer -= Time.deltaTime;
                 yield return null;
             }
         }
-        
+
+        private void SwapWolfMaterialToStained()
+        {
+            var randomIndex = Random.Range(1, stainedWolfMaterials.Count - 1);
+            var outline = GetComponent<Outline>();
+            outline.enabled = false;
+            meshRenderer.materials = new[] { stainedWolfMaterials[randomIndex] };
+            outline.enabled = true;
+        }
+
+        private void SwapWolfMaterialToNormal()
+        {
+            var outline = GetComponent<Outline>();
+            outline.enabled = false;
+            meshRenderer.materials = new[] { stainedWolfMaterials[0] };
+            outline.enabled = true;
+        }
+
         private void Update()
         {
             RotateGraphics();
@@ -187,7 +236,7 @@ namespace Player
                 rotationSpeed * Time.deltaTime
             );
         }
-        
+
         private void OnDrawGizmos()
         {
             if (graphics == null || playerSO == null)

@@ -1,9 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Sheep : MonoBehaviour, IShootable
 {
+    [SerializeField] private List<Material> sheepMaterials;
+    [SerializeField] private SkinnedMeshRenderer sheepMeshRenderer;
     [SerializeField] private ShootableType _shootableType = ShootableType.Sheep;
     
     [Header("Movements")]
@@ -27,6 +30,8 @@ public class Sheep : MonoBehaviour, IShootable
     [Header("Debugging")]
     [SerializeField] private Transform _testPoint;
     private Vector3 _moveVector;
+    
+    [SerializeField] private GameObject bloodPuddle;
 
     public bool isAlive = true;
 
@@ -43,17 +48,37 @@ public class Sheep : MonoBehaviour, IShootable
     }
     public void GotShot()
     {
-        Debug.Log("GotShot");
-        Die();
+        OnShepperdKilledSheep();
+        
     }
     public ShootableType GetShootableType()
     {
         return _shootableType;
     }
     public bool CanBeTargeted => true;
-    public void NotifyPuddleEnter()
+    public void NotifyPuddleEnter(PuddleType puddleType)
+    {
+        switch (puddleType)
+        {
+            case PuddleType.Blood:
+                SetStained();
+                break;
+            case PuddleType.Water:
+                SetUnStained();
+                break;
+        }
+    }
+
+    private void SetUnStained()
     {
         _shootableType = ShootableType.Sheep;
+        var randomIndex = 0;
+        var outline = GetComponent<Outline>();
+        outline.enabled = false;
+        sheepMeshRenderer.materials = new[] { sheepMaterials[randomIndex]};
+        outline.enabled = true;
+        outline.enabled = true;
+        
     }
 
     #endregion
@@ -208,7 +233,13 @@ public class Sheep : MonoBehaviour, IShootable
     #region Staining
     public void SetStained()
     {
+        if (_shootableType == ShootableType.BloodySheep) return;
         _shootableType = ShootableType.BloodySheep;
+        var randomIndex = Random.Range(1, sheepMaterials.Count-1);
+        var outline = GetComponent<Outline>();
+        outline.enabled = false;
+        sheepMeshRenderer.materials = new[] { sheepMaterials[randomIndex]};
+        outline.enabled = true;
     }
     #endregion
 
@@ -221,6 +252,17 @@ public class Sheep : MonoBehaviour, IShootable
         isAlive = false;
         StopAllCoroutines();
         Destroy(gameObject);
+        Instantiate(bloodPuddle, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
+    }
+
+    private void OnShepperdKilledSheep()
+    {
+        _agent.isStopped = true;
+        _agent.enabled = false;
+        isAlive = false;
+        StopAllCoroutines();
+        Destroy(gameObject);
+        Instantiate(bloodPuddle, transform.position, transform.rotation);
     }
 
     private void OnDrawGizmos()

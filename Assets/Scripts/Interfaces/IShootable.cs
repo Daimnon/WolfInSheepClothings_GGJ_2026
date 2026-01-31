@@ -6,6 +6,5 @@ public interface IShootable
     public void GotShot();
     public ShootableType GetShootableType();
     public bool CanBeTargeted { get; }
-
-    public void NotifyPuddleEnter();
+    public void NotifyPuddleEnter(PuddleType puddleType);
 }

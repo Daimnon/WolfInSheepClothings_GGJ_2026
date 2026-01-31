@@ -501,10 +501,15 @@ MonoBehaviour:
   rb: {fileID: 1387598342471342118}
   playerControlsHandler: {fileID: 2387184740864843604}
   playerSO: {fileID: 11400000, guid: e1fd3fab68c825a48888ab30178c9071, type: 2}
-  shepherdAI: {fileID: 0}
   turnForce: 10
   graphics: {fileID: 6295772188712530605}
   rotationSpeed: 720
+  meshRenderer: {fileID: 4248172724700111625}
+  stainedWolfMaterials:
+  - {fileID: 2100000, guid: 5f4912402e0df964ba4f1438780adffa, type: 2}
+  - {fileID: 2100000, guid: 7bd830a02158c294bbc6a95869d40590, type: 2}
+  - {fileID: 2100000, guid: 96eb6c7f50a0eb04685acaa46e6d68d9, type: 2}
+  - {fileID: 2100000, guid: 19dc4e59e4865eb44a5649cf6bc15427, type: 2}
   lastLookDirection: {x: 0, y: 0, z: 0}
 --- !u!54 &1387598342471342118
 Rigidbody:
@@ -635,6 +640,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5079ac4b970d3684d963ec003a9fe3aa, type: 3}
+--- !u!23 &4248172724700111625 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7456687347849216422, guid: 5079ac4b970d3684d963ec003a9fe3aa, type: 3}
+  m_PrefabInstance: {fileID: 6741874586388996783}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6295772188712530605 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 779369325160910850, guid: 5079ac4b970d3684d963ec003a9fe3aa, type: 3}

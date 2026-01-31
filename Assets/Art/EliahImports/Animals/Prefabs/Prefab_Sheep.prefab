@@ -73,6 +73,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c286b35e9eff4f043a771742e44695dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepMaterials:
+  - {fileID: 2100000, guid: 1c860bfa95ef54148847b3bb37cba803, type: 2}
+  - {fileID: 2100000, guid: 074fc2ca25727364cb4abbba92d6fa3c, type: 2}
+  - {fileID: 2100000, guid: b8f0d5cffc9dd1749920124faa92fdf2, type: 2}
+  - {fileID: 2100000, guid: f97b5ffc0bdf0e9429c1d075f2ed1f30, type: 2}
+  sheepMeshRenderer: {fileID: 2521501493848582324}
   _shootableType: 1
   _agent: {fileID: 2658303017506778744}
   _moveSpeed: 2
@@ -85,6 +91,7 @@ MonoBehaviour:
   _minWanderDelay: 4
   _maxWanderDelay: 8
   _testPoint: {fileID: 0}
+  bloodPuddle: {fileID: 277518174756245072, guid: 3b23d2f0a3b5c4d49b07b56400ccaac2, type: 3}
   isAlive: 1
 --- !u!195 &2658303017506778744
 NavMeshAgent:
@@ -272,7 +279,7 @@ PrefabInstance:
     - target: {fileID: -3887185075125053422, guid: ecb9f48876ab88240a20c3457e6052bc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: a038e76492825d74eba7fbb4a1823502, type: 2}
+      objectReference: {fileID: 2100000, guid: 1c860bfa95ef54148847b3bb37cba803, type: 2}
     - target: {fileID: -3887185075125053422, guid: ecb9f48876ab88240a20c3457e6052bc, type: 3}
       propertyPath: 'm_BlendShapeWeights.Array.data[7]'
       value: 0
@@ -290,6 +297,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecb9f48876ab88240a20c3457e6052bc, type: 3}
+--- !u!137 &2521501493848582324 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -3887185075125053422, guid: ecb9f48876ab88240a20c3457e6052bc, type: 3}
+  m_PrefabInstance: {fileID: 7562632270424486054}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8032561938207856461 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ecb9f48876ab88240a20c3457e6052bc, type: 3}

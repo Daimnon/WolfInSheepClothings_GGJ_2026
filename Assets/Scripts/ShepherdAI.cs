@@ -34,7 +34,7 @@ public class ShepherdAI : MonoBehaviour
     [SerializeField] private float frenzyDuration = 8f;
 
     [Header("Patrol")]
-    [SerializeField] private float patrolRadius = 10f;
+    [SerializeField] private Transform[] patrolTargets;
 
     // State
     private ShepherdBehaviour currentState;
@@ -46,6 +46,8 @@ public class ShepherdAI : MonoBehaviour
     private float stateTimer = 0f;
     private float chaseTimer = 0f;
     private bool isInFrenzy = false;
+    private int currentPoint = 0;
+    private float observingAngle = 0f;
 
     private void OnEnable()
     {
@@ -60,6 +62,7 @@ public class ShepherdAI : MonoBehaviour
     void Start()
     {
         startPosition = transform.position;
+        agent.SetDestination(patrolTargets[0].position);
         ChangeState(ShepherdBehaviour.Idle);
     }
 
@@ -110,6 +113,9 @@ public class ShepherdAI : MonoBehaviour
     {
         stateTimer -= Time.deltaTime;
 
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            GoToNextPoint();
+        
         if (stateTimer <= 0)
         {
             ChangeState(ShepherdBehaviour.Observing);
@@ -118,8 +124,9 @@ public class ShepherdAI : MonoBehaviour
 
     private void ObservingState()
     {
-        // Rotate randomly
-        transform.Rotate(0, Random.Range(-30f, 30f) * Time.deltaTime, 0);
+        float speed = 2.0f; // How fast it swings
+        float yRotation = Mathf.Sin(Time.time * speed) * observingAngle;
+        transform.localRotation = Quaternion.Euler(0, yRotation, 0);
 
         stateTimer -= Time.deltaTime;
 
@@ -331,10 +338,12 @@ public class ShepherdAI : MonoBehaviour
         {
             case ShepherdBehaviour.Idle:
                 stateTimer = idleTimer;
+                agent.isStopped = false;
                 break;
 
             case ShepherdBehaviour.Observing:
                 stateTimer = observeTimer;
+                observingAngle = Random.Range(0, 180);
                 agent.isStopped = true;
                 break;
 
@@ -397,6 +406,16 @@ public class ShepherdAI : MonoBehaviour
     #endregion
 
     #region Helper Methods
+    
+    void GoToNextPoint() {
+        if (patrolTargets.Length == 0) return;
+
+        // Set the destination to the current waypoint
+        agent.SetDestination(patrolTargets[currentPoint].position);
+
+        // Cycle to the next point (loops back to 0 at the end)
+        currentPoint = (currentPoint + 1) % patrolTargets.Length;
+    }
 
     private IShootable ScanForTarget()
     {
