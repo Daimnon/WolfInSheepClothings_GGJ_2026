@@ -93,6 +93,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -100,8 +113,8 @@ TextureImporter:
       name: Clock_Inside
       rect:
         serializedVersion: 2
-        x: 558
-        y: 1226
+        x: 650
+        y: 1319
         width: 372
         height: 372
       alignment: 0
@@ -122,10 +135,10 @@ TextureImporter:
       name: ClockOutside
       rect:
         serializedVersion: 2
-        x: 1073
-        y: 1210
-        width: 401
-        height: 403
+        x: 1164
+        y: 1303
+        width: 402
+        height: 402
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,9 +157,9 @@ TextureImporter:
       name: SheepHeadKills
       rect:
         serializedVersion: 2
-        x: 500
-        y: 656
-        width: 400
+        x: 568
+        y: 749
+        width: 430
         height: 400
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -166,8 +179,8 @@ TextureImporter:
       name: AggroMeterOutside
       rect:
         serializedVersion: 2
-        x: 1128
-        y: 650
+        x: 1219
+        y: 738
         width: 292
         height: 403
       alignment: 0
@@ -185,23 +198,45 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AggroMeterInside
+      name: GGJ2026_UI_0
       rect:
         serializedVersion: 2
-        x: 1510
-        y: 672
-        width: 110
-        height: 348
+        x: 1578
+        y: 738
+        width: 150
+        height: 403
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fedfa5ea364ccae48bd8ddee0335afc8
-      internalID: 1870263336
+      spriteID: c258e1d96c4203c41963f762815d0b76
+      internalID: -1408675489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GGJ2026_UI_1
+      rect:
+        serializedVersion: 2
+        x: 1754
+        y: 738
+        width: 292
+        height: 403
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdae6166c8a080c4e87d212d3d25f79f
+      internalID: -1071771658
       vertices: []
       indices: 
       edges: []
@@ -226,6 +261,8 @@ TextureImporter:
       AggroMeterOutside: 467060831
       ClockOutside: 1209348938
       Clock_Inside: -850021028
+      GGJ2026_UI_0: -1408675489
+      GGJ2026_UI_1: -1071771658
       GGJ2026_UI_4: 254673738
       GGJ2026_UI_6: -138206439
       GGJ2026_UI_7: 733614563
