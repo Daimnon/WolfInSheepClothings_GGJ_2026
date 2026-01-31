@@ -61,8 +61,9 @@ namespace Managers
         private IEnumerator PlayMainThemeAfterDelay()
         {
             var s = GetSound(SoundType.Music, "Theme");
-            s.loop = false;
-            while (s.audioSource.isPlaying)
+            var length = s.clip.length;
+            var timer  = s.audioSource.time;
+            while (timer>=length)
             {
                 yield return null;
             }
