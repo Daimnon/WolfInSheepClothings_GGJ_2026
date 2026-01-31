@@ -151,7 +151,7 @@ namespace Player
                                     sheep.Die();
                                     break;
                                 case InputType.Stain:
-                                    sheep.SetStained();
+                                    if(!isBloody) sheep.SetStained();
                                     break;
                             }
                             targetFound = true;

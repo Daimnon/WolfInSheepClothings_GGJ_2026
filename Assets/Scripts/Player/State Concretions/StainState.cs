@@ -23,7 +23,7 @@ namespace Player.State_Concretions
                 rotatedDirection = StateMachine.StateMachineController.GetTransform().forward;
             }
             
-            StateMachine.StateMachineController.StartCheckForSheepCoroutine(InputType.Attack);
+            StateMachine.StateMachineController.StartCheckForSheepCoroutine(InputType.Stain);
 
             RigidbodyUtility.AddImpulse(rotatedDirection, playerSO.StainForce);
         }

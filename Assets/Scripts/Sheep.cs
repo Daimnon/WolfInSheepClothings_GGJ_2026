@@ -1,9 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Sheep : MonoBehaviour, IShootable
 {
+    [SerializeField] private List<Material> sheepMaterials;
+    [SerializeField] private SkinnedMeshRenderer sheepMeshRenderer;
     [SerializeField] private ShootableType _shootableType = ShootableType.Sheep;
     
     [Header("Movements")]
@@ -54,6 +57,7 @@ public class Sheep : MonoBehaviour, IShootable
     public void NotifyPuddleEnter()
     {
         _shootableType = ShootableType.Sheep;
+        sheepMeshRenderer.material = sheepMaterials[0];
     }
 
     #endregion
@@ -209,6 +213,11 @@ public class Sheep : MonoBehaviour, IShootable
     public void SetStained()
     {
         _shootableType = ShootableType.BloodySheep;
+        var randomIndex = Random.Range(1, sheepMaterials.Count-1);
+        var outline = GetComponent<Outline>();
+        outline.enabled = false;
+        sheepMeshRenderer.materials = new[] { sheepMaterials[randomIndex]};
+        outline.enabled = true;
     }
     #endregion
 
