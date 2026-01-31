@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public enum ShootableType
 {
@@ -28,7 +26,9 @@ public class GameManager : MonoBehaviour
     [Header("Timer")]
     [SerializeField] private GameObject _directionalLight;
     [SerializeField] private float _timerDuration = 300.0f; // 300 = 5 mins
+    public float TimerDuration => _timerDuration;
     private float _currentTimeLeft = 0.0f;
+    public float CurrentTimeLeft => _currentTimeLeft;
     private Coroutine _timerCoroutine = null;
     public static Action OnGameTimerEnd;
 

@@ -9,12 +9,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject _cameraToDisable;
     [SerializeField] private GameObject _gameTitle;
     [SerializeField] private UIHandler _uiHandler;
+    [SerializeField] private DayNightCycle _dayNightCycle;
     [SerializeField] private GameObject _pressAnyKey;
     [SerializeField] private float _fadeDuration = 1.0f;
     [SerializeField] private float _lensDistortionIntensity = 0.446f;
 
     private LensDistortion _lensDistortion;
-
     public static Action FinishedCameraPan;
 
     private void Awake()
@@ -89,6 +89,7 @@ public class MainMenu : MonoBehaviour
         _cameraToDisable.SetActive(false);
         _gameTitle.SetActive(false);
         _pressAnyKey.SetActive(false);
+        _dayNightCycle.StartDayNightCycleRotation();
         FadeOutDistortion();
     }
 
