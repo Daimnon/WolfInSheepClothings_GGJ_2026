@@ -7,6 +7,8 @@ namespace Generics
 {
     public abstract class StateMachine
     {
+        [SerializeField] private Animator animator;
+        public Animator Animator => animator;
         // a generic state machine that can handle any type of state that implements the IState interface
         public IStateMachineController StateMachineController { get; private set; }
         public PlayerControlsHandler PlayerControlsHandler { get; private set; }

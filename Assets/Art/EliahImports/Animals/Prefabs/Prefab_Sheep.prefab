@@ -82,11 +82,11 @@ MonoBehaviour:
   _shootableType: 1
   _animator: {fileID: 1260583634257711845}
   _agent: {fileID: 2658303017506778744}
-  _moveSpeed: 2
+  _moveSpeed: 1
   _minMoveDistance: 2
   _maxMoveDistance: 8
-  _fearSpeed: 6
-  _fearRadius: 10
+  _fearSpeed: 0.5
+  _fearRadius: 5
   _chaosFactor: 1.5
   _stuckCheckInterval: 1
   _minDistanceProgress: 0.15
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 4
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []

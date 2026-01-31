@@ -8929,6 +8929,7 @@ GameObject:
   - component: {fileID: 410087041}
   - component: {fileID: 410087040}
   - component: {fileID: 410087042}
+  - component: {fileID: 410087043}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -9045,6 +9046,21 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &410087043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410087039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f14d97e9439a4a468778149c811f8f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DayNightCycle
+  directionalLight: {fileID: 410087040}
+  maxRotationX: 180
+  startRotation: {x: 50, y: -30, z: 0}
 --- !u!1001 &413528406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45859,6 +45875,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7170550200537951464, guid: 9d0d39b8145de8541924ca3dc938d3d0, type: 3}
+      propertyPath: _timerDuration
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7170550200537951464, guid: 9d0d39b8145de8541924ca3dc938d3d0, type: 3}
       propertyPath: sheepCountText
       value: 
       objectReference: {fileID: 0}
@@ -46221,6 +46241,10 @@ PrefabInstance:
       propertyPath: _uiHandler
       value: 
       objectReference: {fileID: 840061464}
+    - target: {fileID: 1656078928086453782, guid: b0c7884a2f7a6764188b36b1efe271ba, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 410087043}
     - target: {fileID: 1656078928086453782, guid: b0c7884a2f7a6764188b36b1efe271ba, type: 3}
       propertyPath: _cameraToDisable
       value: 
