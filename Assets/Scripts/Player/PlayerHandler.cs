@@ -87,9 +87,20 @@ namespace Player
             isHiddenInBush = false;
         }
 
-        public void NotifyPuddleEnter()
+        public void NotifyPuddleEnter(PuddleType puddleType)
         {
-            isBloody = false;
+            switch (puddleType)
+            {
+                case PuddleType.Blood:
+                    isBloody = true;
+                    SwapWolfMaterialToStained();
+                    stainCount = playerSO.MaxStainCount;
+                    break;
+                case PuddleType.Water:
+                    isBloody = false;
+                    SwapWolfMaterialToNormal();
+                    break;
+            }
         }
 
         public GameObject GetGameObj()

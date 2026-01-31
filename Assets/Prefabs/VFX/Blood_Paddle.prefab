@@ -116,7 +116,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 0.5, z: 3}
+  m_Size: {x: 3, y: 1, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &151436476813765272
 MonoBehaviour:
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a101fa0bdf52246bcb47965ca48977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Paddle
+  puddleType: 0
 --- !u!1001 &2793743885542183042
 PrefabInstance:
   m_ObjectHideFlags: 0

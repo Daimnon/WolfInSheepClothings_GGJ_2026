@@ -56,13 +56,27 @@ public class Sheep : MonoBehaviour, IShootable
         return _shootableType;
     }
     public bool CanBeTargeted => true;
-    public void NotifyPuddleEnter()
+    public void NotifyPuddleEnter(PuddleType puddleType)
+    {
+        switch (puddleType)
+        {
+            case PuddleType.Blood:
+                SetStained();
+                break;
+            case PuddleType.Water:
+                SetUnStained();
+                break;
+        }
+    }
+
+    private void SetUnStained()
     {
         _shootableType = ShootableType.Sheep;
         var randomIndex = 0;
         var outline = GetComponent<Outline>();
         outline.enabled = false;
         sheepMeshRenderer.materials = new[] { sheepMaterials[randomIndex]};
+        outline.enabled = true;
         outline.enabled = true;
         
     }
@@ -271,10 +285,5 @@ public class Sheep : MonoBehaviour, IShootable
 
         // Draw the point
         Gizmos.DrawSphere(point, 0.1f);
-    }
-
-    public void NotifyOfEating()
-    {
-        
     }
 }
