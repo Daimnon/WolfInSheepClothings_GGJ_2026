@@ -22,7 +22,6 @@ public class UIHandler : MonoBehaviour
     {
         _mainMenuCanvas.SetActive(false);
         _gameplayCanvas.SetActive(false);
-        _pauseMenuCanvas.SetActive(false);
         _gameoverCanvase.SetActive(false);
         _nextDayCanvas.SetActive(false);
     }

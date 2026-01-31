@@ -7,13 +7,12 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private GameManager _gameManager;
 
     [Header("SheepCount")]
-    [SerializeField] private GameObject _sheepCountIcon;
+    [SerializeField] private RectTransform _sheepCountIcon;
+    [SerializeField] private AnimationCurve scaleCurve;
     [SerializeField] private TextMeshProUGUI _sheepCountTMP;
     [SerializeField] private float _sheepCountAnimDuration = 1.0f;
-    [SerializeField] private float _sheepCountAnimMaxScale = 2.0f;
+    private Vector3 _startScale;
     private Coroutine _sheepCountAnimation;
-
-
 
     private void OnEnable()
     {
@@ -24,6 +23,12 @@ public class GameplayUI : MonoBehaviour
         GameManager.OnUpdateSheepCountUI -= UpdateSheepCount;
     }
 
+    private void Start()
+    {
+        _sheepCountTMP.text = 0.ToString();
+        _startScale = transform.localScale;
+    }
+
     private void UpdateSheepCount(int sheepCount)
     {
         StartSheepCountAnimation();
@@ -32,27 +37,18 @@ public class GameplayUI : MonoBehaviour
 
     private IEnumerator GrowShrink()
     {
-        Vector3 startScale = transform.localScale;
-        float half = _sheepCountAnimDuration * 0.5f;
         float t = 0f;
 
-        while (t < half)
+        while (t < _sheepCountAnimDuration)
         {
             t += Time.deltaTime;
-            transform.localScale = Vector3.Lerp(startScale, startScale * _sheepCountAnimMaxScale, t / half);
+            float normalized = t / _sheepCountAnimDuration;
+            float scale = scaleCurve.Evaluate(normalized);
+            _sheepCountIcon.localScale = _startScale * scale;
             yield return null;
         }
 
-        t = 0f;
-
-        while (t < half)
-        {
-            t += Time.deltaTime;
-            transform.localScale = Vector3.Lerp(startScale * _sheepCountAnimMaxScale, startScale, t / half);
-            yield return null;
-        }
-
-        transform.localScale = startScale;
+        _sheepCountIcon.localScale = _startScale;
     }
 
     private void StartSheepCountAnimation()

@@ -168,6 +168,43 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4535143139246410383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2012848882767166627}
+  m_Layer: 5
+  m_Name: SheepKillCount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2012848882767166627
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4535143139246410383}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2131181657547444753}
+  - {fileID: 8478375995834292130}
+  m_Father: {fileID: 2115921560477144856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -826.85004, y: -510.90002}
+  m_SizeDelta: {x: 369.6333, y: 151.53336}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4686243052610269301
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,7 +217,7 @@ GameObject:
   - component: {fileID: 4170861388434507396}
   - component: {fileID: 1543913300968839743}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: SheepKillCount_TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,16 +230,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4686243052610269301}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2131181657547444753}
+  m_Father: {fileID: 2012848882767166627}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 151.3, y: -19.3}
+  m_AnchoredPosition: {x: 109.81665, y: 38.266663}
   m_SizeDelta: {x: 150, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4170861388434507396
@@ -495,6 +532,7 @@ GameObject:
   - component: {fileID: 1661160808684754042}
   - component: {fileID: 4270828983992792178}
   - component: {fileID: 4405987651511558902}
+  - component: {fileID: 9150964563334994368}
   m_Layer: 5
   m_Name: Gameplay_Canvas
   m_TagString: Untagged
@@ -516,7 +554,7 @@ RectTransform:
   m_Children:
   - {fileID: 4365272883700271353}
   - {fileID: 2973047619871716482}
-  - {fileID: 2131181657547444753}
+  - {fileID: 2012848882767166627}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -587,6 +625,55 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &9150964563334994368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5602577770099100795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d74fedafc85e5e34cbe6e6be34c6883d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplayUI
+  _gameManager: {fileID: 0}
+  _sheepCountIcon: {fileID: 2131181657547444753}
+  scaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.00045685165
+      outSlope: 0.00045685165
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.077313535
+    - serializedVersion: 3
+      time: 0.5
+      value: 1.5
+      inSlope: -0.0016005824
+      outSlope: -0.0016005824
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.005945202
+      outSlope: 0.005945202
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07957703
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _sheepCountTMP: {fileID: 1543913300968839743}
+  _sheepCountAnimDuration: 0.2
 --- !u!1 &5646776774881481896
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,17 +699,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5646776774881481896}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8478375995834292130}
-  m_Father: {fileID: 2115921560477144856}
+  m_Children: []
+  m_Father: {fileID: 2012848882767166627}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20, y: 20}
+  m_AnchoredPosition: {x: 71.66669, y: 66.66669}
   m_SizeDelta: {x: 143.33333, y: 133.33333}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &3748640555025302341
