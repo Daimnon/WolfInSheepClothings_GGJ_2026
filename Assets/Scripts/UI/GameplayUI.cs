@@ -28,6 +28,7 @@ public class GameplayUI : MonoBehaviour
     {
         _sheepCountTMP.text = 0.ToString();
         _startScale = transform.localScale;
+        gameObject.SetActive(false);
     }
 
     private void UpdateSheepCount(int sheepCount)

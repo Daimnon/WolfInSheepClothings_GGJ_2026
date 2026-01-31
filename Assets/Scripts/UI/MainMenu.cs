@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _cameraToDisable;
     [SerializeField] private GameObject _gameTitle;
+    [SerializeField] private UIHandler _uiHandler;
     [SerializeField] private GameObject _pressAnyKey;
     [SerializeField] private float _fadeDuration = 1.0f;
     [SerializeField] private float _lensDistortionIntensity = 0.446f;
@@ -48,6 +49,7 @@ public class MainMenu : MonoBehaviour
         _lensDistortion.active = false; // optional
 
         gameObject.SetActive(false);
+        _uiHandler.RevealGameplayCanvas();
     }
     public void FadeOutDistortion()
     {

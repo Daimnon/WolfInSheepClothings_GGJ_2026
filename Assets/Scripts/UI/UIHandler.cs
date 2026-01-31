@@ -18,10 +18,19 @@ public class UIHandler : MonoBehaviour
         GameManager.OnGameTimerEnd -= OnGameTimerEnd;
     }
 
+
+    public void RevealGameplayCanvas()
+    {
+        _gameplayCanvas.SetActive(true);
+    }
+    public void HideGameplayCanvas()
+    {
+        _gameplayCanvas.SetActive(false);
+    }
+
     public void CloseAllCanvases()
     {
         _mainMenuCanvas.SetActive(false);
-        _gameplayCanvas.SetActive(false);
         _gameoverCanvase.SetActive(false);
         _nextDayCanvas.SetActive(false);
     }
