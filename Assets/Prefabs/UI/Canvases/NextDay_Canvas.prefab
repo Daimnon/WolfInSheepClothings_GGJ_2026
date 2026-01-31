@@ -338,7 +338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2919074915392355246, guid: 24a4ec0f0bf788b4e9c4cf9a571e47d7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 98
+      value: 87
       objectReference: {fileID: 0}
     - target: {fileID: 2919074915392355246, guid: 24a4ec0f0bf788b4e9c4cf9a571e47d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -484,7 +484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2919074915392355246, guid: 24a4ec0f0bf788b4e9c4cf9a571e47d7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 98
+      value: 87
       objectReference: {fileID: 0}
     - target: {fileID: 2919074915392355246, guid: 24a4ec0f0bf788b4e9c4cf9a571e47d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1166,16 +1166,20 @@ PrefabInstance:
       value: ScoreLine SheepKilled
       objectReference: {fileID: 0}
     - target: {fileID: 6233695221011576487, guid: 24a4ec0f0bf788b4e9c4cf9a571e47d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1057103111, guid: ebaff4889a6557c4aaf3535868f7356e, type: 3}
+    - target: {fileID: 6233695221011576487, guid: 24a4ec0f0bf788b4e9c4cf9a571e47d7, type: 3}
       propertyPath: m_Color.b
-      value: 0.22745098
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6233695221011576487, guid: 24a4ec0f0bf788b4e9c4cf9a571e47d7, type: 3}
       propertyPath: m_Color.g
-      value: 0.22745098
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6233695221011576487, guid: 24a4ec0f0bf788b4e9c4cf9a571e47d7, type: 3}
       propertyPath: m_Color.r
-      value: 0.22745098
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9133640632711214880, guid: 24a4ec0f0bf788b4e9c4cf9a571e47d7, type: 3}
       propertyPath: m_Name
