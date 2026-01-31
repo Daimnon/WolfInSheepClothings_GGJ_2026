@@ -149,5 +149,6 @@ public enum InputType
     Eat,
     Stain,
     Sprint,
-    Hide
+    Hide,
+    Death
 }

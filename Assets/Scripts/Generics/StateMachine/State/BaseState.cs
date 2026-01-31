@@ -1,4 +1,6 @@
 using Singleton;
+using UnityEngine;
+
 namespace Generics
 {
     public abstract class BaseState : IState, IUpdateable
@@ -7,6 +9,18 @@ namespace Generics
         protected StateMachine StateMachine { get; set; }
 
         protected PlayerSO playerSO;
+        
+        protected Animator Animator => StateMachine.Animator;
+    
+        protected static readonly int IdleHash = Animator.StringToHash("Idle");
+        protected static readonly int WalkHash = Animator.StringToHash("Walking");
+        protected static readonly int RunHash = Animator.StringToHash("Running");
+        protected static readonly int AttackHash = Animator.StringToHash("SwipeAttack");
+        protected static readonly int HideHash = Animator.StringToHash("Hide");
+        protected static readonly int StainHash = Animator.StringToHash("Stain");
+        protected static readonly int DeathHash = Animator.StringToHash("Death");
+    
+        protected const float CrossFadeDuration = 0.1f;
         
         protected BaseState(StateMachine stateMachine, PlayerSO playerSO)
         {
@@ -52,6 +66,11 @@ namespace Generics
         protected virtual void UnregisterFromUpdatingParent()
         {
             UpdatingParent.UnregisterUpdateable(this);
+        }
+        
+        public virtual void ForceUnregisterFromUpdate()
+        {
+            UnregisterFromUpdatingParent();
         }
 
         public virtual void NewInputUpdate(InputCommand inputCommand)

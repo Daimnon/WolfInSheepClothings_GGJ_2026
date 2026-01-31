@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7615071848053896492}
   - component: {fileID: 4673579119103290665}
-  - component: {fileID: 9040761220001168222}
   - component: {fileID: 2759784815649164301}
   - component: {fileID: 8050331116952645809}
   - component: {fileID: 4652482438342191164}
@@ -62,19 +61,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &9040761220001168222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1572311025963796287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40a53d44e9eaa42cab9beff3cbbe80ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimationController
-  animator: {fileID: 4673579119103290665}
 --- !u!114 &2759784815649164301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,17 +73,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5364246d04042eba1c122fe3fa792c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShepherdAI
+  animator: {fileID: 0}
   stateText: {fileID: 0}
   agent: {fileID: 8050331116952645809}
   player: {fileID: 0}
   farmZone: {fileID: 0}
-  coneCollider: {fileID: 8487097851352841138}
   shootableLayer:
     serializedVersion: 2
     m_Bits: 128
   idleTimer: 5
   observeTimer: 5
+  runningTimeout: 8
+  stuckTimeout: 1.5
   maxChaseTime: 5
+  minChaseMultiplier: 0.5
+  maxChaseMultiplier: 2
   aggroIncreasePerBody: 10
   aggroDecayRate: 2
   minSpeed: 3.5

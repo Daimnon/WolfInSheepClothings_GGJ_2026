@@ -12,6 +12,7 @@ namespace Player.State_Concretions
         public override void OnEnter()
         {
             base.OnEnter();
+            Animator.CrossFadeInFixedTime(HideHash, CrossFadeDuration);
             // Here you can add logic to handle what happens when the player enters the hide state
             StateMachine.NotifyChangeInShootableType(ShootableType.Sheep);
         }

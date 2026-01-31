@@ -30,6 +30,8 @@ namespace Player.State_Concretions
 
         public override void Tick(float deltaTime)
         {
+            Animator.CrossFadeInFixedTime(AttackHash, 0.05f);
+            
             timer += deltaTime;
             if (timer >= playerSO.AttackDuration)
             {

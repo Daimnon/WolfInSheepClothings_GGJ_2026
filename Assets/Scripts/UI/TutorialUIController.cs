@@ -3,6 +3,7 @@ using System.Collections;
 using Player;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -16,8 +17,9 @@ namespace UI
         [SerializeField] private CanvasGroup HidingPopup;
         [SerializeField] private CanvasGroup StainPopup;
         [SerializeField] private CanvasGroup ShepherdPopup;
-
-        [SerializeField] private float waitDuration = 0.5f;
+        
+        [SerializeField] private float generalWaitDuration = 0.5f;
+        [SerializeField] private float waitDurationOnStartUp = 1.3f;
 
         private bool isTutorial = true;
 
@@ -40,6 +42,7 @@ namespace UI
             PlayerHandler.OnPlayerInProximityOf += PopUpAccordingToProximity;
             MainMenu.FinishedCameraPan += TriggerWasd;
             PlayerHandler.OnPlayerBloodyAndNextToSheep += TriggerStaining;
+            
             HideWasdPopup();
             HideAttackPopup();
             HideBushPopup();
@@ -56,16 +59,20 @@ namespace UI
                 HideHidingPopup();
                 HideStainPopup();
                 HideShepherdPopup();
+                
+                ResumeGameTime();
+                ParentButton.interactable = false;
             });
 
 
-            tutorialSkipToggler.onClick.AddListener(() => { isTutorial = !isTutorial; });
+            //tutorialSkipToggler.onClick.AddListener(() => { isTutorial = !isTutorial; });
         }
 
         private void TriggerStaining()
         {
-            if (!isStaining)
+            if (!isStaining && isAttack)
             {
+                isStaining = true;
                 popupCoroutine = StartCoroutine(WaitABitAndPopup(ShowStainPopup));
             }
         }
@@ -199,6 +206,8 @@ namespace UI
             ShepherdPopup.alpha = 0;
             ShepherdPopup.interactable = false;
             ShepherdPopup.blocksRaycasts = false;
+            if (!isShepherd) return;
+            
             isHiding = true;
             ShowHidingPopup();
         }
@@ -207,9 +216,29 @@ namespace UI
         {
             if (!isTutorial) yield break;
 
-            yield return new WaitForSeconds(waitDuration);
+            if (!isWasd)
+            {
+                yield return new WaitForSeconds(waitDurationOnStartUp);
+            }
+            else
+            {
+                yield return new WaitForSeconds(generalWaitDuration);
+            }
+
+            
+            StopGameTime();
             ParentButton.interactable = true;
             action.Invoke();
+        }
+        
+        private void StopGameTime()
+        {
+            Time.timeScale = 0f;
+        }
+        
+        private void ResumeGameTime()
+        {
+            Time.timeScale = 1f;
         }
     }
 }

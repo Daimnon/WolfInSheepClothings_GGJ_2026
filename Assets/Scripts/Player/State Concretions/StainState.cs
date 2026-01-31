@@ -24,6 +24,7 @@ namespace Player.State_Concretions
             }
             
             StateMachine.StateMachineController.StartCheckForSheepCoroutine(InputType.Stain);
+            Animator.CrossFadeInFixedTime(StainHash, CrossFadeDuration);
 
             RigidbodyUtility.AddImpulse(rotatedDirection, playerSO.StainForce);
         }
