@@ -9,6 +9,7 @@ TagManager:
   - Paddle
   - Bush
   - Sheep
+  - Shepherd
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - UI
   - Ground
   - Shootable
-  - 
+  - No grass
   - 
   - 
   - 
