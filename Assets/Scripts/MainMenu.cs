@@ -7,6 +7,8 @@ using UnityEngine.Rendering.Universal;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _cameraToDisable;
+    [SerializeField] private GameObject _gameTitle;
+    [SerializeField] private GameObject _pressAnyKey;
     [SerializeField] private float _fadeDuration = 1.0f;
     [SerializeField] private float _lensDistortionIntensity = 0.446f;
 
@@ -44,6 +46,8 @@ public class MainMenu : MonoBehaviour
 
         _lensDistortion.intensity.value = 0f;
         _lensDistortion.active = false; // optional
+
+        gameObject.SetActive(false);
     }
     public void FadeOutDistortion()
     {
@@ -81,6 +85,8 @@ public class MainMenu : MonoBehaviour
     public void TransitionToGame()
     {
         _cameraToDisable.SetActive(false);
+        _gameTitle.SetActive(false);
+        _pressAnyKey.SetActive(false);
         FadeOutDistortion();
     }
 
