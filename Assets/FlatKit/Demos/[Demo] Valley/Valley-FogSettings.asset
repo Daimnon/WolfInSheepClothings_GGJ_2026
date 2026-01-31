@@ -13,7 +13,6 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - USE_DISTANCE_FOG
-  - USE_HEIGHT_FOG
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -47,13 +46,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DistanceFogIntensity: 0.694
+    - _DistanceFogIntensity: 0.31
     - _DistanceHeightBlend: 0.251
     - _Far: 150
     - _HeightFogIntensity: 0.631
     - _HighWorldY: 35
     - _LowWorldY: 0
-    - _Near: 27
+    - _Near: 51.8
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
@@ -100,10 +99,10 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 3
-  near: 27
+  near: 51.8
   far: 150
-  distanceFogIntensity: 0.694
-  useHeight: 1
+  distanceFogIntensity: 0.31
+  useHeight: 0
   heightGradient:
     serializedVersion: 2
     key0: {r: 0.0745098, g: 0.94509804, b: 0.9280485, a: 0}
