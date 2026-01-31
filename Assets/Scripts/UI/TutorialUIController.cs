@@ -18,7 +18,7 @@ namespace UI
         [SerializeField] private CanvasGroup StainPopup;
         [SerializeField] private CanvasGroup ShepherdPopup;
         
-        [SerializeField] private float generalWaitDuration = 0.5f;
+        [SerializeField] private float generalWaitDuration = 0.2f;
         [SerializeField] private float waitDurationOnStartUp = 1.3f;
 
         private bool isTutorial = true;
@@ -60,8 +60,18 @@ namespace UI
                 HideStainPopup();
                 HideShepherdPopup();
                 
-                ResumeGameTime();
-                ParentButton.interactable = false;
+                if (!isShepherd)
+                {
+                    ResumeGameTime();   
+                    ParentButton.interactable = false;
+                }
+
+                if (isHiding)
+                {
+                    ResumeGameTime();   
+                    ParentButton.interactable = false;
+                }
+
             });
 
 

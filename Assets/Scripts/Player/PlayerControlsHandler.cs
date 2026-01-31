@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -111,12 +112,12 @@ public class PlayerControlsHandler: MonoBehaviour
 
     public bool IsNoInputActive()
     {
-        return playerInputs.Count == 0;
+        return playerInputs.Count == 0 && PlayerHandler.isAlive;
     }
 
     public bool IsNoInputWithSprint()
     {
-        if (playerInputs.Count == 1)
+        if (playerInputs.Count == 1 && PlayerHandler.isAlive)
         {
             foreach (var input in playerInputs)
             {
