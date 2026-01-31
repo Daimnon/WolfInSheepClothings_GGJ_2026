@@ -28,7 +28,6 @@ namespace Singleton
                 return;
             }
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
 
         void OnDestroy()
