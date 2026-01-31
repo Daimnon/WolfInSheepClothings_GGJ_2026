@@ -10,7 +10,7 @@ namespace Player.State_Concretions
 
         public override void Tick(float deltaTime)
         {
-            throw new System.NotImplementedException();
+            Animator.CrossFadeInFixedTime(DeathHash, 0.05f);
         }
 
         public override void FixedTick(float fixedDeltaTime)

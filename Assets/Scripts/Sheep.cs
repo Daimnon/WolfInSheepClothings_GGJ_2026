@@ -61,8 +61,8 @@ public class Sheep : MonoBehaviour, IShootable
     public void GotShot()
     {
         OnShepperdKilledSheep();
-        
     }
+    
     public ShootableType GetShootableType()
     {
         return _shootableType;
