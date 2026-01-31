@@ -19,7 +19,7 @@ namespace Player
         [SerializeField] private UIHandler _uiHandler;
         [SerializeField] private float rotationSpeed = 720.0f;
 
-        [FormerlySerializedAs("MeshRenderer")] [SerializeField] private MeshRenderer meshRenderer;
+        [SerializeField] private SkinnedMeshRenderer meshRenderer;
         [SerializeField] private List<Material> stainedWolfMaterials;
 
         private WolfStateMachine stateMachine;

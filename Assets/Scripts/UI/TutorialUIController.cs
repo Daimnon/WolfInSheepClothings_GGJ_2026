@@ -3,6 +3,7 @@ using System.Collections;
 using Player;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -16,8 +17,9 @@ namespace UI
         [SerializeField] private CanvasGroup HidingPopup;
         [SerializeField] private CanvasGroup StainPopup;
         [SerializeField] private CanvasGroup ShepherdPopup;
-
-        [SerializeField] private float waitDuration = 0.5f;
+        
+        [SerializeField] private float generalWaitDuration = 0.5f;
+        [SerializeField] private float waitDurationOnStartUp = 1.3f;
 
         private bool isTutorial = true;
 
@@ -57,6 +59,9 @@ namespace UI
                 HideHidingPopup();
                 HideStainPopup();
                 HideShepherdPopup();
+                
+                ResumeGameTime();
+                ParentButton.interactable = false;
             });
 
 
@@ -211,7 +216,17 @@ namespace UI
         {
             if (!isTutorial) yield break;
 
-            yield return new WaitForSeconds(waitDuration);
+            if (!isWasd)
+            {
+                yield return new WaitForSeconds(waitDurationOnStartUp);
+            }
+            else
+            {
+                yield return new WaitForSeconds(generalWaitDuration);
+            }
+
+            
+            StopGameTime();
             ParentButton.interactable = true;
             action.Invoke();
         }
