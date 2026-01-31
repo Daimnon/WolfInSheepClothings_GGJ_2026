@@ -178,6 +178,7 @@ namespace UI
 
         public void ShowHidingPopup()
         {
+            isHiding = true;
             HidingPopup.alpha = 1;
             HidingPopup.interactable = false;
             HidingPopup.blocksRaycasts = false;
