@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum ShootableType
 {
@@ -92,13 +93,14 @@ public class GameManager : MonoBehaviour
         OnGameTimerEnd?.Invoke();
         Debug.Log("Event: OnGameTimerEnd");
     }
-    
     public void StopTimer()
     {
         StopCoroutine(_timerCoroutine);
         _timerCoroutine = null;
     }
+    #endregion
 
+    #region SheepCount
     public void InvokeUpdateSheepCount()
     {
         OnUpdateSheepCount?.Invoke();
@@ -109,14 +111,12 @@ public class GameManager : MonoBehaviour
         OnUpdateSheepCountUI?.Invoke(sheepCount);
         Debug.Log("Event: OnUpdateSheepCount");
     }
-
     private void UpdateSheepCount()
     {
         sheepCount++;
         InvokeUpdateSheepCountUI(sheepCount);
     }
-
-
+    //?
     public void InvokeOnPlayerAteSheep()
     {
         OnPlayerAteSheep?.Invoke();

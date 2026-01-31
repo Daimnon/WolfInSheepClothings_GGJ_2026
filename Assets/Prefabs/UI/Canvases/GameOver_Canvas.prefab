@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 6990041220915457716}
   - component: {fileID: 1856752780146131534}
   - component: {fileID: 419828780228649805}
+  - component: {fileID: 2842681869118882616}
   m_Layer: 5
   m_Name: GameOver_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3387445395879989908
 RectTransform:
   m_ObjectHideFlags: 0
@@ -102,6 +103,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2842681869118882616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6821911727679493469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ccf2ff4ea257fc4ca6ddd99a9c9f33f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameoverUI
 --- !u!1001 &234220621446711482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -711,6 +724,38 @@ PrefabInstance:
     - target: {fileID: 5396415983629467313, guid: baeb871593247b2439ed14942feedb5e, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722329606862659464, guid: baeb871593247b2439ed14942feedb5e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722329606862659464, guid: baeb871593247b2439ed14942feedb5e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722329606862659464, guid: baeb871593247b2439ed14942feedb5e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2842681869118882616}
+    - target: {fileID: 6722329606862659464, guid: baeb871593247b2439ed14942feedb5e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722329606862659464, guid: baeb871593247b2439ed14942feedb5e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722329606862659464, guid: baeb871593247b2439ed14942feedb5e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameoverUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722329606862659464, guid: baeb871593247b2439ed14942feedb5e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722329606862659464, guid: baeb871593247b2439ed14942feedb5e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7555662333255043382, guid: baeb871593247b2439ed14942feedb5e, type: 3}
       propertyPath: m_Pivot.x
