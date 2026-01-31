@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
     }
     public void StopTimer()
     {
-        StopCoroutine(_timerCoroutine);
+        if (_timerCoroutine != null) StopCoroutine(_timerCoroutine);
         _timerCoroutine = null;
     }
     #endregion
