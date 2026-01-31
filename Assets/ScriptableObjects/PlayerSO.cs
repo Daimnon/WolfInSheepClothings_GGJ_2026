@@ -30,6 +30,9 @@ public class PlayerSO : ScriptableObject
     [SerializeField] private float detectionRadius;
     public float DetectionRadius => detectionRadius;
     
+    [SerializeField] private int maxStainCount = 2;
+    public int MaxStainCount => maxStainCount;
+    
 
 
 }

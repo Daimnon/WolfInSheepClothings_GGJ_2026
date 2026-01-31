@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     [Header("Events")]
     public static Action<Vector3> OnSheepKilled;
     public static Action UpdateSheepCount;
+    public static Action OnPlayerAteSheep;
     
     [Header("UI")]
     public TMP_Text timerText;

@@ -46,8 +46,8 @@ public class Sheep : MonoBehaviour, IShootable
     }
     public void GotShot()
     {
-        Debug.Log("GotShot");
-        Die();
+        OnShepperdKilledSheep();
+        
     }
     public ShootableType GetShootableType()
     {
@@ -212,6 +212,7 @@ public class Sheep : MonoBehaviour, IShootable
     #region Staining
     public void SetStained()
     {
+        if (_shootableType == ShootableType.BloodySheep) return;
         _shootableType = ShootableType.BloodySheep;
         var randomIndex = Random.Range(1, sheepMaterials.Count-1);
         var outline = GetComponent<Outline>();
@@ -230,6 +231,17 @@ public class Sheep : MonoBehaviour, IShootable
         isAlive = false;
         StopAllCoroutines();
         Destroy(gameObject);
+        // puddle of blood
+    }
+
+    private void OnShepperdKilledSheep()
+    {
+        _agent.isStopped = true;
+        _agent.enabled = false;
+        isAlive = false;
+        StopAllCoroutines();
+        Destroy(gameObject);
+        // puddle of blood
     }
 
     private void OnDrawGizmos()
@@ -252,5 +264,10 @@ public class Sheep : MonoBehaviour, IShootable
 
         // Draw the point
         Gizmos.DrawSphere(point, 0.1f);
+    }
+
+    public void NotifyOfEating()
+    {
+        
     }
 }

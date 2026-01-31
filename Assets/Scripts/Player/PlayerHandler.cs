@@ -19,16 +19,16 @@ namespace Player
         private bool isHiddenInBush = false;
         private bool isBloody = false;
         private bool isCrouching = false;
+        private int stainCount;
         
         public Vector2 MoveInput => playerControlsHandler != null ? playerControlsHandler.moveVector : Vector2.zero;
         public Vector2 LookInput => playerControlsHandler != null ? playerControlsHandler.lookVector : Vector2.zero;
         public Vector3 lastLookDirection;
-
-        public static event Action<Vector3> OnSheepKilled;
-
+        
         public void Awake()
         {
             RigidbodyUtility.Initialize(rb);
+            stainCount = playerSO.MaxStainCount;
         }
 
         private void Start()
@@ -143,16 +143,31 @@ namespace Player
                     if (hit.collider.gameObject.CompareTag("Sheep"))
                     {
                         var sheep = hit.collider.GetComponent<Sheep>();
-                        if (sheep && sheep.isAlive)
+                        if (sheep)
                         {
                             switch (inputType)
                             {
                                 case InputType.Attack:
-                                    sheep.Die();
+                                    if (sheep.isAlive)
+                                    {
+                                        sheep.Die();    
+                                        isBloody = true;
+                                        stainCount = playerSO.MaxStainCount;
+                                    }
                                     break;
                                 case InputType.Stain:
-                                    if(!isBloody) sheep.SetStained();
+                                {
+                                    if (sheep.isAlive && isBloody && stainCount > 0)
+                                    {
+                                        sheep.SetStained();
+                                        stainCount--;
+                                        if (stainCount <= 0)
+                                        {
+                                            isBloody = false;
+                                        }
+                                    }
                                     break;
+                                }
                             }
                             targetFound = true;
                         }
