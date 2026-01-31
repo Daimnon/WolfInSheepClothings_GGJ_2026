@@ -24121,7 +24121,7 @@ MonoBehaviour:
   FocusTracking: 0
   FocusTarget: {fileID: 0}
   FocusOffset: 0
-  Profile: {fileID: 11400000, guid: 5e02049507ac54f9888989755f6210ae, type: 2}
+  Profile: {fileID: 0}
 --- !u!1001 &1649066909
 PrefabInstance:
   m_ObjectHideFlags: 0
