@@ -5,6 +5,7 @@ namespace Player.State_Concretions
 {
     public class LocomotionState : BaseState
     {
+        private bool isIdle;
         public LocomotionState(StateMachine stateMachine, PlayerSO playerSO) : base(stateMachine, playerSO)
         {
             
@@ -23,11 +24,19 @@ namespace Player.State_Concretions
 
             if (playerMove == Vector2.zero)
             {
-                Animator.CrossFadeInFixedTime(IdleHash, CrossFadeDuration);
+                if (!isIdle)
+                {
+                    Animator.CrossFadeInFixedTime(IdleHash, CrossFadeDuration);
+                    isIdle = true;
+                }
             }
             else
             {
-                Animator.CrossFadeInFixedTime(WalkHash, CrossFadeDuration);
+                if (isIdle)
+                {
+                    Animator.CrossFadeInFixedTime(WalkHash, CrossFadeDuration);
+                    isIdle = false;
+                }
             }
             
             RigidbodyUtility.AddForce(playerMove3, playerSO.NormalForce);

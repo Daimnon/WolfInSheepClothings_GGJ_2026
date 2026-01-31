@@ -28,10 +28,11 @@ namespace Generics
         public Vector2 MoveInput => PlayerControlsHandler != null ? PlayerControlsHandler.moveVector : Vector2.zero;
         public Vector2 LookInput => PlayerControlsHandler != null ? PlayerControlsHandler.lookVector : Vector2.zero;
         
-        protected StateMachine(IStateMachineController stateMachineController, PlayerControlsHandler playerControlsHandler, PlayerSO playerSO)
+        protected StateMachine(IStateMachineController stateMachineController, PlayerControlsHandler playerControlsHandler, PlayerSO playerSO, Animator animator)
         {
             this.StateMachineController = stateMachineController;
             this.PlayerControlsHandler = playerControlsHandler;
+            this.animator = animator;
         }
 
         public void NotifyEndBehaviour()

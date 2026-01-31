@@ -21,6 +21,7 @@ namespace Player
 
         [SerializeField] private SkinnedMeshRenderer meshRenderer;
         [SerializeField] private List<Material> stainedWolfMaterials;
+        [SerializeField] private Animator Animator;
 
         private WolfStateMachine stateMachine;
         private ShootableType shootableType;
@@ -45,7 +46,7 @@ namespace Player
 
         private void Start()
         {
-            stateMachine = new WolfStateMachine(this, playerControlsHandler, playerSO);
+            stateMachine = new WolfStateMachine(this, playerControlsHandler, playerSO, Animator);
             stateMachine.Start();
             playerControlsHandler.OnInput += stateMachine.PassInput;
         }

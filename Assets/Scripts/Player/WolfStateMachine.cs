@@ -1,11 +1,12 @@
 using Generics;
 using Player.State_Concretions;
+using UnityEngine;
 
 namespace Player
 {
     public class WolfStateMachine : StateMachine
     {
-        public WolfStateMachine(IStateMachineController stateMachineController, PlayerControlsHandler playerControlsHandler, PlayerSO playerSO) : base(stateMachineController, playerControlsHandler, playerSO)
+        public WolfStateMachine(IStateMachineController stateMachineController, PlayerControlsHandler playerControlsHandler, PlayerSO playerSO, Animator animator) : base(stateMachineController, playerControlsHandler, playerSO, animator)
         {
             var locomotionState = new LocomotionState(this, playerSO);
             AddState(locomotionState, locomotionState.GetType());
