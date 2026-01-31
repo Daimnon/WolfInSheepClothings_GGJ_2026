@@ -47,6 +47,9 @@ public class Sheep : MonoBehaviour, IShootable
     private void Start()
     {
         _agent.speed = _moveSpeed;
+        int randInt = Random.Range(0, 2);
+
+        if (randInt == 0) SetNewDestination();
         StartWandering();
     }
 
