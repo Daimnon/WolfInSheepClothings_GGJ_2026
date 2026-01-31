@@ -14,7 +14,18 @@ namespace UI
         [SerializeField] private CanvasGroup StainPopup;
         [SerializeField] private CanvasGroup ShepherdPopup;
         
+        [SerializeField] private float waitDuration = 0.5f;
         
+        private Coroutine popupCoroutine;
+        
+        bool isBush = false;
+        bool isShepherd = false;
+        bool isWasd = false;
+        bool isAttack = false;
+        bool isHiding = false;
+        bool isStaining = false;
+
+        private int countSheep;
 
         private void Awake()
         {
@@ -33,11 +44,26 @@ namespace UI
             
         }
 
-        private void PopUpAccordingToProximity(TutorialEntetyType tet)
+        private void PopUpAccordingToProximity(TutorialEntetyType entityInProxOfPlayer)
         {
-            switch (tet)
+            switch (entityInProxOfPlayer)
             {
-                
+                case TutorialEntetyType.Sheep:
+                    if (isWasd)
+                    {
+                        if (!isAttack)
+                        {
+                            isAttack = true;
+                            StartCoroutine(WaitABitAndPopup(ShowAttackPopup));
+                        }
+                    }
+
+                    break;
+                case TutorialEntetyType.Bush:
+                    
+                    break;
+                case TutorialEntetyType.Shepherd:
+                    break;
             }
         }
 
@@ -121,7 +147,8 @@ namespace UI
 
         private IEnumerator WaitABitAndPopup(Action action)
         {
-            
+            yield return new WaitForSeconds(waitDuration);
+            action.Invoke();
         }
     }
 }
