@@ -21,8 +21,6 @@ public class PlayerSO : ScriptableObject
     public float StainDuration => stainDuration;
     [SerializeField] private float stainForce;
     public float StainForce => stainForce;
-    [SerializeField] private float eatingDurationToConsume;
-    public float EatingDurationToConsume => eatingDurationToConsume;
 
     [SerializeField] private float detectionRange;
     public float DetectionRange => detectionRange;

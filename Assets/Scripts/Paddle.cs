@@ -12,7 +12,6 @@ public class Paddle : MonoBehaviour
         if (other.CompareTag(_playerTag) || other.CompareTag(_sheepTag))
         {
             other.transform.GetComponent<IShootable>().NotifyPuddleEnter(puddleType);
-            Debug.Log("NotifyPaddleEnter");
         }
     }
 }

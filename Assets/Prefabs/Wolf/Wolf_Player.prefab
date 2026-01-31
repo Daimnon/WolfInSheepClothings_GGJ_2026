@@ -305,6 +305,7 @@ GameObject:
   - component: {fileID: 1387598342471342118}
   - component: {fileID: 9145312715263039083}
   - component: {fileID: 8109275466443202713}
+  - component: {fileID: 1939549841847821604}
   m_Layer: 0
   m_Name: Wolf_Player
   m_TagString: Player
@@ -579,6 +580,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!135 &1939549841847821604
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7984897905258642286}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6741874586388996783
 PrefabInstance:
   m_ObjectHideFlags: 0

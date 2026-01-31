@@ -113,7 +113,23 @@ public class PlayerControlsHandler: MonoBehaviour
     {
         return playerInputs.Count == 0;
     }
-    
+
+    public bool IsNoInputWithSprint()
+    {
+        if (playerInputs.Count == 1)
+        {
+            foreach (var input in playerInputs)
+            {
+                if (input.Value.inputType == InputType.Sprint)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return playerInputs.Count == 0;
+    }
+
 }
 public struct InputCommand
 {

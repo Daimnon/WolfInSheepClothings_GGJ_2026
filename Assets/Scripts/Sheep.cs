@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class Sheep : MonoBehaviour, IShootable
 {
     [SerializeField] private List<Material> sheepMaterials;
     [SerializeField] private SkinnedMeshRenderer sheepMeshRenderer;
     [SerializeField] private ShootableType _shootableType = ShootableType.Sheep;
+    [SerializeField] private Animator _animator;
     
     [Header("Movements")]
     [SerializeField] private NavMeshAgent _agent;
@@ -16,6 +19,7 @@ public class Sheep : MonoBehaviour, IShootable
     [SerializeField] private float _maxMoveDistance = 5.0f;
     [SerializeField] private float _fearSpeed = 6.0f;
     [SerializeField] private float _fearRadius = 6.0f;
+    [SerializeField] private float _chaosFactor = 1.5f;
 
     [Header("Unstuck Settings")]
     [SerializeField] private float _stuckCheckInterval = 1.0f;
@@ -34,6 +38,11 @@ public class Sheep : MonoBehaviour, IShootable
     [SerializeField] private GameObject bloodPuddle;
 
     public bool isAlive = true;
+
+    private void Awake()
+    {
+        GameManager.OnSheepKilled += RunChaotically;
+    }
 
     private void Start()
     {
@@ -94,6 +103,7 @@ public class Sheep : MonoBehaviour, IShootable
     [ContextMenu("GetNewMoveVector")]
     private Vector3 GetNewMoveVector(Vector3 direction)
     {
+        _animator.SetBool("IsWalk", true);
         float newMagnitude = Random.Range(_minMoveDistance, _maxMoveDistance);
         Vector3 newTargetPos = direction * newMagnitude;
         _moveVector = newTargetPos;
@@ -113,7 +123,8 @@ public class Sheep : MonoBehaviour, IShootable
 
     #region CheckForFear
     private bool IsPointInsideRadius(Vector3 point)
-    { 
+    {
+        if (!isAlive) return false;
         Vector3 center = transform.position;
         return (point - center).sqrMagnitude <= _fearRadius * _fearRadius;
     }
@@ -121,16 +132,15 @@ public class Sheep : MonoBehaviour, IShootable
     {
         if (IsPointInsideRadius(point))
         {
+            _animator.SetBool("IsScared", true);
             //Debug.Log("Inside Radius");
             Vector3 oppositeDirection = (transform.position - point).normalized;
-            Vector3 newTargetPos = transform.position + GetNewMoveVector(oppositeDirection);
+            float randomChaosY = Random.Range(-_chaosFactor, _chaosFactor);
+            var oppositeWithChaos = (Quaternion.Euler(new Vector3(0 ,randomChaosY ,0)) * oppositeDirection).normalized;
+            Vector3 newTargetPos = transform.position + GetNewMoveVector(oppositeWithChaos);
             _agent.speed = _fearSpeed;
             _agent.SetDestination(newTargetPos);
             StartStuckCheck();
-        }
-        else
-        {
-            Debug.Log("Not Inside Radius");
         }
     }
 
@@ -195,6 +205,8 @@ public class Sheep : MonoBehaviour, IShootable
     {
         //Debug.Log("Sheep is stuck, recovering.");
         _agent.ResetPath();
+        _animator.SetBool("IsScared", false);
+        _animator.SetBool("IsWalk", false);
     }
     #endregion
 

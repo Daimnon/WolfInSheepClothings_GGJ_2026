@@ -19,14 +19,19 @@ namespace Player
             var attackState = new AttackState(this, playerSO);
             AddState(attackState, attackState.GetType());
             AddAnyTransition(attackState.GetType(), new FuncPredicate(() => playerControlsHandler.IsInputTypeActive(InputType.Attack)));
+            AddTransition(attackState, locomotionState, new FuncPredicate(playerControlsHandler.IsNoInputWithSprint));
             
             var hideState = new HideState(this, playerSO);
             AddState(hideState, hideState.GetType());
             AddAnyTransition(hideState.GetType(), new FuncPredicate(() => playerControlsHandler.IsInputTypeActive(InputType.Hide)));
+            AddTransition(hideState, locomotionState, new FuncPredicate(playerControlsHandler.IsNoInputWithSprint));
+
             
             var stainState = new StainState(this, playerSO);
             AddState(stainState, stainState.GetType());
             AddAnyTransition(stainState.GetType(), new FuncPredicate(() => playerControlsHandler.IsInputTypeActive(InputType.Stain)));
+            AddTransition(hideState, locomotionState, new FuncPredicate(playerControlsHandler.IsNoInputWithSprint));
+
             
             //eating state left
             

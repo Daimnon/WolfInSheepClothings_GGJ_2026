@@ -31,6 +31,8 @@ namespace Player
         public Vector2 LookInput => playerControlsHandler != null ? playerControlsHandler.lookVector : Vector2.zero;
         public Vector3 lastLookDirection;
 
+        public static Action<TutorialEntetyType> OnPlayerInProximityOf;
+
         public void Awake()
         {
             RigidbodyUtility.Initialize(rb);
@@ -252,5 +254,30 @@ namespace Player
             Gizmos.DrawWireSphere(transform.position, playerSO.DetectionRadius);
             Gizmos.DrawWireSphere(transform.position + playerMove3 * playerSO.DetectionRange, playerSO.DetectionRadius);
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Sheep"))
+            {
+                OnPlayerInProximityOf?.Invoke(TutorialEntetyType.Sheep);
+            }
+
+            if (other.CompareTag("Bush"))
+            {
+                OnPlayerInProximityOf?.Invoke(TutorialEntetyType.Bush);
+            }
+
+            if (other.CompareTag("Shepherd"))
+            {
+                OnPlayerInProximityOf?.Invoke(TutorialEntetyType.Shepherd);
+            }
+        }
     }
+}
+
+public enum TutorialEntetyType
+{
+    Sheep,
+    Bush,
+    Shepherd
 }

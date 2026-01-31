@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private float _lensDistortionIntensity = 0.446f;
 
     private LensDistortion _lensDistortion;
+
+    public static Action FinishedCameraPan;
 
     private void Awake()
     {
@@ -66,6 +69,8 @@ public class MainMenu : MonoBehaviour
         }
 
         _lensDistortion.intensity.value = _lensDistortionIntensity;
+        
+        FinishedCameraPan?.Invoke();
     }
     public void FadeInDistortion()
     {
