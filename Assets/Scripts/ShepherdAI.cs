@@ -378,7 +378,7 @@ public class ShepherdAI : MonoBehaviour
 
     #region Event Handlers
 
-    private void OnSheepKilledHandler(Vector3 position)
+    private void OnSheepKilledHandler(Vector3 position, KilledBy killedBy)
     {
         if (aggroMeter >= 50)
         {

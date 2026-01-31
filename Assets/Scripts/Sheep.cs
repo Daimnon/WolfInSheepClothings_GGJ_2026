@@ -131,7 +131,7 @@ public class Sheep : MonoBehaviour, IShootable
         Vector3 center = transform.position;
         return (point - center).sqrMagnitude <= _fearRadius * _fearRadius;
     }
-    private void RunChaotically(Vector3 point)
+    private void RunChaotically(Vector3 point, KilledBy killedBy)
     {
         if (IsPointInsideRadius(point))
         {
@@ -258,10 +258,10 @@ public class Sheep : MonoBehaviour, IShootable
     }
     #endregion
 
-    public void Die()
+    public void Die(KilledBy killedBy)
     {
-        GameManager.OnSheepKilled?.Invoke(transform.position);
-        GameManager.UpdateSheepCount?.Invoke();
+        GameManager.OnSheepKilled?.Invoke(transform.position, killedBy);
+        GameManager.OnUpdateSheepCount?.Invoke();
         _agent.isStopped = true;
         _agent.enabled = false;
         isAlive = false;

@@ -26432,17 +26432,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8718778828885884488, guid: e5f4daf24146ee040b5a2d7a73b30aa0, type: 3}
   m_PrefabInstance: {fileID: 1151816116}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1157974635 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5273195379129796469, guid: 272496bbb1f16594095d1da4a7f1ca0a, type: 3}
-  m_PrefabInstance: {fileID: 1932849879}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &1162933690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28232,17 +28221,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8718778828885884488, guid: e5f4daf24146ee040b5a2d7a73b30aa0, type: 3}
   m_PrefabInstance: {fileID: 1252840834}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1252876904 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7928575826067830147, guid: 272496bbb1f16594095d1da4a7f1ca0a, type: 3}
-  m_PrefabInstance: {fileID: 1932849879}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &1259272700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28412,6 +28390,23 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2115921560477144856, guid: 22ac06de50810f04d8c1f9b13bc34d3b, type: 3}
   m_PrefabInstance: {fileID: 1611112124045745098}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1270709280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577337516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d74fedafc85e5e34cbe6e6be34c6883d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplayUI
+  _gameManager: {fileID: 0}
+  _sheepCountIcon: {fileID: 0}
+  _sheepCountTMP: {fileID: 0}
+  _sheepCountAnimDuration: 1
+  _sheepCountAnimMaxScale: 2
 --- !u!1001 &1274351287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35165,17 +35160,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598926989}
   m_CullTransparentMesh: 1
---- !u!114 &1599901522 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 729137290523809727, guid: 272496bbb1f16594095d1da4a7f1ca0a, type: 3}
-  m_PrefabInstance: {fileID: 1932849879}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &1605773719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43929,17 +43913,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3535208041032819139, guid: 9af1308182532a448bc08c1daf29a7e9, type: 3}
---- !u!114 &2048866408 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7762007309810385788, guid: 272496bbb1f16594095d1da4a7f1ca0a, type: 3}
-  m_PrefabInstance: {fileID: 1932849879}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &2051996436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46453,7 +46426,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5602577770099100795, guid: 22ac06de50810f04d8c1f9b13bc34d3b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1270709280}
   m_SourcePrefab: {fileID: 100100000, guid: 22ac06de50810f04d8c1f9b13bc34d3b, type: 3}
 --- !u!1001 &1726532944154804940
 PrefabInstance:
@@ -46767,15 +46743,15 @@ PrefabInstance:
     - target: {fileID: 7170550200537951464, guid: 9d0d39b8145de8541924ca3dc938d3d0, type: 3}
       propertyPath: timerText
       value: 
-      objectReference: {fileID: 2048866408}
+      objectReference: {fileID: 0}
     - target: {fileID: 7170550200537951464, guid: 9d0d39b8145de8541924ca3dc938d3d0, type: 3}
       propertyPath: aggroMeter
       value: 
-      objectReference: {fileID: 1252876904}
+      objectReference: {fileID: 0}
     - target: {fileID: 7170550200537951464, guid: 9d0d39b8145de8541924ca3dc938d3d0, type: 3}
       propertyPath: sheepCountText
       value: 
-      objectReference: {fileID: 1157974635}
+      objectReference: {fileID: 0}
     - target: {fileID: 7170550200537951464, guid: 9d0d39b8145de8541924ca3dc938d3d0, type: 3}
       propertyPath: _directionalLight
       value: 
@@ -47139,7 +47115,7 @@ PrefabInstance:
     - target: {fileID: 2759784815649164301, guid: 73cf224538fa1494ab90cdbb4cc8eb00, type: 3}
       propertyPath: stateText
       value: 
-      objectReference: {fileID: 1599901522}
+      objectReference: {fileID: 0}
     - target: {fileID: 2759784815649164301, guid: 73cf224538fa1494ab90cdbb4cc8eb00, type: 3}
       propertyPath: patrolTargets.Array.size
       value: 4

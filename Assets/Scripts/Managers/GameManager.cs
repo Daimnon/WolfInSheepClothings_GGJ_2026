@@ -11,6 +11,12 @@ public enum ShootableType
     Hidden
 }
 
+public enum KilledBy
+{
+    Wolf,
+    Shepherd
+}
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance = null;
@@ -26,21 +32,12 @@ public class GameManager : MonoBehaviour
     public static Action OnGameTimerEnd;
 
     [Header("Events")]
-    public static Action<Vector3> OnSheepKilled;
-    public static Action UpdateSheepCount;
+    public static Action<Vector3, KilledBy> OnSheepKilled;
+    public static Action OnUpdateSheepCount;
+    public static Action<int> OnUpdateSheepCountUI;
     public static Action OnPlayerAteSheep;
     
     public static int sheepCount = 0;
-
-    private void OnEnable()
-    {
-        UpdateSheepCount += HandleSheepKilled;
-    }
-
-    private void OnDisable()
-    {
-        UpdateSheepCount -= HandleSheepKilled;
-    }
 
     private void Awake()
     {
@@ -53,7 +50,16 @@ public class GameManager : MonoBehaviour
             _instance = this;
         }
     }
-    
+
+    private void OnEnable()
+    {
+        OnUpdateSheepCount += UpdateSheepCount;
+    }
+    private void OnDisable()
+    {
+        OnUpdateSheepCount -= UpdateSheepCount;
+    }
+
     private void Start()
     {
         StartTimer();
@@ -86,16 +92,35 @@ public class GameManager : MonoBehaviour
         OnGameTimerEnd?.Invoke();
         Debug.Log("Event: OnGameTimerEnd");
     }
+    
     public void StopTimer()
     {
         StopCoroutine(_timerCoroutine);
         _timerCoroutine = null;
     }
 
-    private void HandleSheepKilled()
+    public void InvokeUpdateSheepCount()
+    {
+        OnUpdateSheepCount?.Invoke();
+        Debug.Log("Event: OnUpdateSheepCount");
+    }
+    public void InvokeUpdateSheepCountUI(int sheepCount)
+    {
+        OnUpdateSheepCountUI?.Invoke(sheepCount);
+        Debug.Log("Event: OnUpdateSheepCount");
+    }
+
+    private void UpdateSheepCount()
     {
         sheepCount++;
+        InvokeUpdateSheepCountUI(sheepCount);
     }
-    
+
+
+    public void InvokeOnPlayerAteSheep()
+    {
+        OnPlayerAteSheep?.Invoke();
+        Debug.Log("Event: OnPlayerAteSheep");
+    }
     #endregion
 }

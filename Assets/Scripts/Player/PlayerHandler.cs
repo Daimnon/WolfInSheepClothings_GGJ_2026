@@ -173,7 +173,7 @@ namespace Player
                             switch (inputType)
                             {
                                 case InputType.Attack:
-                                    sheep.Die();
+                                    sheep.Die(KilledBy.Wolf);
                                     isBloody = true;
                                     SwapWolfMaterialToStained();
                                     stainCount = playerSO.MaxStainCount;
