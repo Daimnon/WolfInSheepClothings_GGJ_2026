@@ -95,7 +95,7 @@ MonoBehaviour:
   shootableLayer:
     serializedVersion: 2
     m_Bits: 128
-  idleTimer: 10
+  idleTimer: 5
   observeTimer: 5
   maxChaseTime: 5
   aggroIncreasePerBody: 10
@@ -106,7 +106,7 @@ MonoBehaviour:
   detectionRadius: 12
   shotDamage: 100
   frenzyDuration: 8
-  patrolRadius: 10
+  patrolTargets: []
 --- !u!195 &8050331116952645809
 NavMeshAgent:
   m_ObjectHideFlags: 0

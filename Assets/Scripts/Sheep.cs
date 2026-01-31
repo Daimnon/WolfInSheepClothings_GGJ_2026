@@ -30,6 +30,8 @@ public class Sheep : MonoBehaviour, IShootable
     [Header("Debugging")]
     [SerializeField] private Transform _testPoint;
     private Vector3 _moveVector;
+    
+    [SerializeField] private GameObject bloodPuddle;
 
     public bool isAlive = true;
 
@@ -236,7 +238,7 @@ public class Sheep : MonoBehaviour, IShootable
         isAlive = false;
         StopAllCoroutines();
         Destroy(gameObject);
-        // puddle of blood
+        Instantiate(bloodPuddle, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
     }
 
     private void OnShepperdKilledSheep()
@@ -246,7 +248,7 @@ public class Sheep : MonoBehaviour, IShootable
         isAlive = false;
         StopAllCoroutines();
         Destroy(gameObject);
-        // puddle of blood
+        Instantiate(bloodPuddle, transform.position, transform.rotation);
     }
 
     private void OnDrawGizmos()

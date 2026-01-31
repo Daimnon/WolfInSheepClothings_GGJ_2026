@@ -91,6 +91,8 @@ MonoBehaviour:
   _minWanderDelay: 4
   _maxWanderDelay: 8
   _testPoint: {fileID: 0}
+  bloodParticles: {fileID: 0}
+  bloodPuddle: {fileID: 277518174756245072, guid: 3b23d2f0a3b5c4d49b07b56400ccaac2, type: 3}
   isAlive: 1
 --- !u!195 &2658303017506778744
 NavMeshAgent:
