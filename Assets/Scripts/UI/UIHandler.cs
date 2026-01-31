@@ -43,7 +43,7 @@ public class UIHandler : MonoBehaviour
     public void OpenGameoverCanvas()
     {
         CloseAllCanvases();
-        _mainMenuCanvas.SetActive(true);
+        _gameoverCanvase.SetActive(true);
     }
     public void OpenNextDayCanvas()
     {
