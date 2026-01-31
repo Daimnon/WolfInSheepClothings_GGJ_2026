@@ -15,6 +15,7 @@ namespace Player
         [SerializeField] private PlayerSO playerSO;
         [SerializeField] private float turnForce;
         [SerializeField] private Transform graphics;
+        [SerializeField] private UIHandler _uiHandler;
         [SerializeField] private float rotationSpeed = 720.0f;
 
         [FormerlySerializedAs("MeshRenderer")] [SerializeField] private MeshRenderer meshRenderer;
@@ -110,10 +111,16 @@ namespace Player
             return gameObject;
         }
 
+        [ContextMenu("TryGotShot")]
         public void GotShot()
         {
-            // implement game over here
-            Destroy(gameObject);
+            StartCoroutine(GameOverUIDelay(1.0f));
+            GameManager.Instance.StopTimer();
+        }
+        private IEnumerator GameOverUIDelay(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            _uiHandler.OpenGameoverCanvas();
         }
 
         public ShootableType GetShootableType()

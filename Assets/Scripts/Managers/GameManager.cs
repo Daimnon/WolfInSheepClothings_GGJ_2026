@@ -16,9 +16,11 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance = null;
     public static GameManager Instance => _instance;
 
-    [Header("Timer")]
-    [SerializeField] private float _timerDuration = 300.0f; // 300 = 5 mins
     [SerializeField] private ShepherdAI _shepherd;
+
+    [Header("Timer")]
+    [SerializeField] private GameObject _directionalLight;
+    [SerializeField] private float _timerDuration = 300.0f; // 300 = 5 mins
     private float _currentTimeLeft = 0.0f;
     private Coroutine _timerCoroutine = null;
     public static Action OnGameTimerEnd;
@@ -27,11 +29,6 @@ public class GameManager : MonoBehaviour
     public static Action<Vector3> OnSheepKilled;
     public static Action UpdateSheepCount;
     public static Action OnPlayerAteSheep;
-    
-    [Header("UI")]
-    public TMP_Text timerText;
-    public TMP_Text sheepCountText;
-    public TMP_Text aggroMeter;
     
     public static int sheepCount = 0;
 
@@ -86,16 +83,15 @@ public class GameManager : MonoBehaviour
 
         InvokeOnGameTimerEnd();
     }
-    public static void InvokeOnGameTimerEnd()
+    public void InvokeOnGameTimerEnd()
     {
         OnGameTimerEnd?.Invoke();
         Debug.Log("Event: OnGameTimerEnd");
     }
-
-    private void Update()
+    public void StopTimer()
     {
-        timerText.text = ("Timer: " + _currentTimeLeft.ToString("0.0"));
-        aggroMeter.text = ("Aggro meter: " + _shepherd.AggroMeter.ToString("F0") + "%");
+        StopCoroutine(_timerCoroutine);
+        _timerCoroutine = null;
     }
 
     private void HandleSheepKilled()
