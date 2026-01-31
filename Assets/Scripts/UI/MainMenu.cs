@@ -49,6 +49,9 @@ public class MainMenu : MonoBehaviour
         _lensDistortion.active = false; // optional
 
         gameObject.SetActive(false);
+        
+        Debug.Log("Invoking FinishedCameraPan");
+        FinishedCameraPan?.Invoke();
         _uiHandler.RevealGameplayCanvas();
     }
     public void FadeOutDistortion()
@@ -76,7 +79,6 @@ public class MainMenu : MonoBehaviour
 
         _lensDistortion.intensity.value = _lensDistortionIntensity;
         
-        FinishedCameraPan?.Invoke();
     }
     public void FadeInDistortion()
     {

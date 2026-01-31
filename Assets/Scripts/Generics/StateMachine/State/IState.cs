@@ -7,5 +7,6 @@ namespace Generics
         public void OnEnter();
         public void OnExit();
         public void NewInputUpdate(InputCommand inputCommand);
+        public void ForceUnregisterFromUpdate();
     }
 }

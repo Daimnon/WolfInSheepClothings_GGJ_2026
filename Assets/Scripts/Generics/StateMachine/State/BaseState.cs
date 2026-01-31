@@ -53,6 +53,11 @@ namespace Generics
         {
             UpdatingParent.UnregisterUpdateable(this);
         }
+        
+        public virtual void ForceUnregisterFromUpdate()
+        {
+            UnregisterFromUpdatingParent();
+        }
 
         public virtual void NewInputUpdate(InputCommand inputCommand)
         {

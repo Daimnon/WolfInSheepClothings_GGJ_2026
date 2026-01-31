@@ -101,6 +101,14 @@ namespace Generics
             return node;
         }
         
+        public void ForceUnregisterAllStates()
+        {
+            foreach (var node in states)
+            {
+                node.Value.State.ForceUnregisterFromUpdate();
+            }
+        }
+        
         protected void AddAnyTransition(Type to, IPredicate condition)
         {
             if (states.TryGetValue(to, out var toNode))

@@ -31,6 +31,10 @@ namespace Player
             AddState(stainState, stainState.GetType());
             AddAnyTransition(stainState.GetType(), new FuncPredicate(() => playerControlsHandler.IsInputTypeActive(InputType.Stain)));
             AddTransition(hideState, locomotionState, new FuncPredicate(playerControlsHandler.IsNoInputWithSprint));
+            
+            var deathState = new DeathState(this, playerSO);
+            AddState(deathState, deathState.GetType());
+            AddAnyTransition(deathState.GetType(), new FuncPredicate(() => !PlayerHandler.isAlive));
 
             
             //eating state left

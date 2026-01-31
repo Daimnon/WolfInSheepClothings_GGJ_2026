@@ -40,6 +40,7 @@ namespace UI
             PlayerHandler.OnPlayerInProximityOf += PopUpAccordingToProximity;
             MainMenu.FinishedCameraPan += TriggerWasd;
             PlayerHandler.OnPlayerBloodyAndNextToSheep += TriggerStaining;
+            
             HideWasdPopup();
             HideAttackPopup();
             HideBushPopup();
@@ -59,13 +60,14 @@ namespace UI
             });
 
 
-            tutorialSkipToggler.onClick.AddListener(() => { isTutorial = !isTutorial; });
+            //tutorialSkipToggler.onClick.AddListener(() => { isTutorial = !isTutorial; });
         }
 
         private void TriggerStaining()
         {
-            if (!isStaining)
+            if (!isStaining && isAttack)
             {
+                isStaining = true;
                 popupCoroutine = StartCoroutine(WaitABitAndPopup(ShowStainPopup));
             }
         }
@@ -199,6 +201,8 @@ namespace UI
             ShepherdPopup.alpha = 0;
             ShepherdPopup.interactable = false;
             ShepherdPopup.blocksRaycasts = false;
+            if (!isShepherd) return;
+            
             isHiding = true;
             ShowHidingPopup();
         }
@@ -210,6 +214,16 @@ namespace UI
             yield return new WaitForSeconds(waitDuration);
             ParentButton.interactable = true;
             action.Invoke();
+        }
+        
+        private void StopGameTime()
+        {
+            Time.timeScale = 0f;
+        }
+        
+        private void ResumeGameTime()
+        {
+            Time.timeScale = 1f;
         }
     }
 }

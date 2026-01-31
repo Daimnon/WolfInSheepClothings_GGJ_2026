@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Generics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -27,6 +28,7 @@ namespace Player
         private bool isBloody = false;
         private bool isCrouching = false;
         private int stainCount;
+        public static bool isAlive = true;
 
         public Vector2 MoveInput => playerControlsHandler != null ? playerControlsHandler.moveVector : Vector2.zero;
         public Vector2 LookInput => playerControlsHandler != null ? playerControlsHandler.lookVector : Vector2.zero;
@@ -117,7 +119,15 @@ namespace Player
         {
             StartCoroutine(GameOverUIDelay(1.0f));
             GameManager.Instance.StopTimer();
+            isAlive = false;
+            stateMachine.PassInput(new InputCommand(InputType.Death, InputActionPhase.Performed));
         }
+
+        private void OnDestroy()
+        {
+            stateMachine.ForceUnregisterAllStates();
+        }
+
         private IEnumerator GameOverUIDelay(float seconds)
         {
             yield return new WaitForSeconds(seconds);
