@@ -57,7 +57,12 @@ public class Sheep : MonoBehaviour, IShootable
     public void NotifyPuddleEnter()
     {
         _shootableType = ShootableType.Sheep;
-        sheepMeshRenderer.material = sheepMaterials[0];
+        var randomIndex = 0;
+        var outline = GetComponent<Outline>();
+        outline.enabled = false;
+        sheepMeshRenderer.materials = new[] { sheepMaterials[randomIndex]};
+        outline.enabled = true;
+        
     }
 
     #endregion
