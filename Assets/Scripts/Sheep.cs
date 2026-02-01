@@ -135,34 +135,19 @@ public class Sheep : MonoBehaviour, IShootable
     {
         if (IsPointInsideRadius(point))
         {
-            _animator.SetBool("IsScared", true);
-            //Debug.Log("Inside Radius");
-            Vector3 oppositeDirection = (transform.position - point).normalized;
             float randomChaosY = Random.Range(-_chaosFactor, _chaosFactor);
-            var oppositeWithChaos = (Quaternion.Euler(new Vector3(0 ,randomChaosY ,0)) * oppositeDirection).normalized;
+            Vector3 oppositeDirection = (transform.position - point).normalized;
+            Vector3 oppositeWithChaos = (Quaternion.Euler(new Vector3(0 ,randomChaosY ,0)) * oppositeDirection).normalized;
             Vector3 newTargetPos = transform.position + GetNewMoveVector(oppositeWithChaos);
             _agent.speed = _fearSpeed;
+
+            _animator.SetBool("IsScared", true);
             _agent.SetDestination(newTargetPos);
             StartStuckCheck();
         }
     }
 
-    [ContextMenu("RunChaotically")]
-    private void RunChaotically()
-    {
-        if (IsPointInsideRadius(_testPoint.position))
-        {
-            //Debug.Log("Inside Radius");
-            Vector3 oppositeDirection = (transform.position - _testPoint.position).normalized;
-            Vector3 newTargetPos = transform.position + GetNewMoveVector(oppositeDirection);
-            _agent.speed = _fearSpeed;
-            _agent.SetDestination(newTargetPos);
-        }
-        else
-        {
-            Debug.Log("Not Inside Radius");
-        }
-    }
+    
     #endregion
 
     #region Unstuck
@@ -280,6 +265,23 @@ public class Sheep : MonoBehaviour, IShootable
         Instantiate(bloodPuddle, transform.position, transform.rotation);
     }
 
+    #region Debugging & Gizmos
+    [ContextMenu("RunChaotically")]
+    private void RunChaotically()
+    {
+        if (IsPointInsideRadius(_testPoint.position))
+        {
+            //Debug.Log("Inside Radius");
+            Vector3 oppositeDirection = (transform.position - _testPoint.position).normalized;
+            Vector3 newTargetPos = transform.position + GetNewMoveVector(oppositeDirection);
+            _agent.speed = _fearSpeed;
+            _agent.SetDestination(newTargetPos);
+        }
+        else
+        {
+            Debug.Log("Not Inside Radius");
+        }
+    }
     private void OnDrawGizmos()
     {
         if (_testPoint == null)
@@ -301,4 +303,5 @@ public class Sheep : MonoBehaviour, IShootable
         // Draw the point
         Gizmos.DrawSphere(point, 0.1f);
     }
+    #endregion
 }

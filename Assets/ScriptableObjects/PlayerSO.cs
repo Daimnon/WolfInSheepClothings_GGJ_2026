@@ -1,10 +1,8 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "PlayerSO", menuName = "Scriptable Objects/PlayerSO", order = 100)]
+[CreateAssetMenu(fileName = "new PlayerSO", menuName = "Scriptable Objects/PlayerSO", order = 0)]
 public class PlayerSO : ScriptableObject
 {
-    
     [SerializeField] private float normalForce;
     public float NormalForce => normalForce;
     [SerializeField] private float maxNormalVelocity;
@@ -30,7 +28,4 @@ public class PlayerSO : ScriptableObject
     
     [SerializeField] private int maxStainCount = 2;
     public int MaxStainCount => maxStainCount;
-    
-
-
 }
