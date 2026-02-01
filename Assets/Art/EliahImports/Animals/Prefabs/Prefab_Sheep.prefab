@@ -87,7 +87,7 @@ MonoBehaviour:
   _minMoveDistance: 2
   _maxMoveDistance: 8
   _fearSpeed: 6
-  _fearRadius: 2
+  _fearRadius: 6
   _chaosFactor: 1.5
   _stuckCheckInterval: 1
   _minDistanceProgress: 0.15
