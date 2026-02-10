@@ -11,6 +11,7 @@ namespace Player
 {
     public class PlayerHandler : MonoBehaviour, IStateMachineController, IShootable
     {
+        [SerializeField] private PlayerInput _inputs;
         [SerializeField] private Rigidbody rb;
         [SerializeField] private PlayerControlsHandler playerControlsHandler;
         [SerializeField] private PlayerSO playerSO;
@@ -46,6 +47,7 @@ namespace Player
 
         private void Start()
         {
+            _inputs.ActivateInput();
             stateMachine = new WolfStateMachine(this, playerControlsHandler, playerSO, Animator);
             stateMachine.Start();
             playerControlsHandler.OnInput += stateMachine.PassInput;
@@ -122,6 +124,8 @@ namespace Player
             GameManager.Instance.StopTimer();
             isAlive = false;
             stateMachine.PassInput(new InputCommand(InputType.Death, InputActionPhase.Performed));
+            playerControlsHandler.OnInput -= stateMachine.PassInput;
+            _inputs.DeactivateInput();
         }
 
         private void OnDestroy()

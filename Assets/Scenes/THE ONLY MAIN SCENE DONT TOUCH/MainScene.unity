@@ -9893,8 +9893,8 @@ MonoBehaviour:
   m_SerializedVersion: 0
   m_AgentTypeID: -334000983
   m_CollectObjects: 1
-  m_Size: {x: 40, y: 10, z: 40}
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Size: {x: 40, y: 1, z: 40}
+  m_Center: {x: 0, y: 0, z: 0}
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -24775,8 +24775,8 @@ MonoBehaviour:
   m_SerializedVersion: 0
   m_AgentTypeID: -1372625422
   m_CollectObjects: 1
-  m_Size: {x: 50, y: 10, z: 50}
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Size: {x: 50, y: 1, z: 50}
+  m_Center: {x: 0, y: 0, z: 0}
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -44079,9 +44079,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1163082400332920387, guid: b24a0e8edc3d30c48b5a7dce24b23de1, type: 3}
+      propertyPath: _inputs
+      value: 
+      objectReference: {fileID: 2080047230}
+    - target: {fileID: 1163082400332920387, guid: b24a0e8edc3d30c48b5a7dce24b23de1, type: 3}
       propertyPath: _uiHandler
       value: 
       objectReference: {fileID: 1036452160}
+    - target: {fileID: 1163082400332920387, guid: b24a0e8edc3d30c48b5a7dce24b23de1, type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 2080047230}
     - target: {fileID: 6442970712103989765, guid: b24a0e8edc3d30c48b5a7dce24b23de1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -44136,6 +44144,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6442970712103989765, guid: b24a0e8edc3d30c48b5a7dce24b23de1, type: 3}
   m_PrefabInstance: {fileID: 2080047222}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2080047230 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2267616062030188673, guid: b24a0e8edc3d30c48b5a7dce24b23de1, type: 3}
+  m_PrefabInstance: {fileID: 2080047222}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
 --- !u!1001 &2084116807
 PrefabInstance:
   m_ObjectHideFlags: 0
